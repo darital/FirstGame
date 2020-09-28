@@ -53,10 +53,5 @@
             android:background="#6AE36F"
             android:text="this is my text" />
 
-        <Button
-            android:id="@+id/button"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="234234" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
