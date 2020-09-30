@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#A2F5FF"
+    android:background="@drawable/images"
     android:padding="15dp"
     tools:context=".NewGame">
 
@@ -19,7 +19,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
             android:gravity="center"
-            android:text="nurmuhammad"
+            android:text="Restart?"
             android:textSize="30sp" />
 
         <LinearLayout
