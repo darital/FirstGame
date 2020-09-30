@@ -51,6 +51,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#6AE36F"
-            android:text="this is my text" />
+            android:text="this is my answer" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
