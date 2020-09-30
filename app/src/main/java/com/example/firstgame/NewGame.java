@@ -19,7 +19,6 @@ Button btnOk,btnCancel;
         btnCancel= (Button) findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
 
-
     }
 
     @Override
