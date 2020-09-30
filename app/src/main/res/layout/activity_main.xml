@@ -12,8 +12,8 @@
         android:layout_height="match_parent"
         android:layout_margin="10dp"
         android:orientation="vertical"
-        tools:layout_editor_absoluteX="10dp"
-        tools:layout_editor_absoluteY="10dp">
+        tools:layout_editor_absoluteX="9dp"
+        tools:layout_editor_absoluteY="9dp">
 
         <TextView
             android:id="@+id/textView2"
