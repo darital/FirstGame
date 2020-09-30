@@ -7,6 +7,7 @@
     android:background="@drawable/background"
     tools:context=".SplashActivity">
 
+
     <ImageView
         android:id="@+id/imageView2"
         android:layout_width="187dp"
@@ -16,8 +17,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.36" />
-
+        app:layout_constraintVertical_bias="0.391" />
 
     <com.victor.loading.newton.NewtonCradleLoading
         android:id="@+id/newton_cradle_loading"
@@ -25,18 +25,8 @@
         android:layout_height="150dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
-        app:layout_constraintVertical_bias="0.222" />
+        app:layout_constraintVertical_bias="0.517" />
 
-    <Button
-        android:id="@+id/next"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="next"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/newton_cradle_loading" />
 </androidx.constraintlayout.widget.ConstraintLayout>
