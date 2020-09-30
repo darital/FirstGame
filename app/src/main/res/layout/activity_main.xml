@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/mx0930"
+    android:background="@drawable/max0930"
     tools:context=".MainActivity">
 
     <LinearLayout
@@ -44,7 +44,8 @@
             android:ems="10"
             android:hint="Sonni kiriting..."
             android:inputType="number"
-            android:maxLength="3" />
+            android:maxLength="3"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/btnOk"
