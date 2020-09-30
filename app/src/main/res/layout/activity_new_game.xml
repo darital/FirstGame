@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="Yangi o'yin boshlaymizmi?"
+            android:text="Nurmuhammad"
             android:textSize="30sp" />
 
         <LinearLayout
