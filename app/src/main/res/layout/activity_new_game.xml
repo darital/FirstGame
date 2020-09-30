@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background"
+    android:background="#A2F5FF"
     android:padding="15dp"
     tools:context=".NewGame">
 
@@ -18,8 +18,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="25dp"
-            android:text="Nurmuhammad"
-            android:textColor="#FFFFFF"
+            android:gravity="center"
+            android:text="nurmuhammad"
             android:textSize="30sp" />
 
         <LinearLayout
@@ -33,7 +33,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="#009688"
-                android:text="ha" />
+                android:text="YANGI O`YIN" />
 
             <Button
                 android:id="@+id/btnCancel"
