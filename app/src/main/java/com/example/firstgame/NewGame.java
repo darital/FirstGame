@@ -2,9 +2,10 @@ package com.example.firstgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.os.Bundle;
 
-public class NewGame extends AppCompatActivity {
+public class NewGame extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

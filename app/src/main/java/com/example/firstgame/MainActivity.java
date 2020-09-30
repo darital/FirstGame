@@ -3,6 +3,7 @@ package com.example.firstgame;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -24,7 +25,7 @@ Button btnOk;
 int myAnswer;
 int randomNumber;
 Random random;
-int cnt = 5;
+int cnt = 1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,7 +53,9 @@ int cnt = 5;
                 if(cnt < 0){
                     etAnswer.setText("");
                     tvResult.setText("Siz yutqazdingiz");
-                    btnOk.setText("Qayta o'ynash");
+
+                    Intent intent = new Intent(MainActivity.this, NewGame.class);
+                    startActivity(intent);
                     break;
                 }
                 myAnswer = Integer.parseInt(etAnswer.getText().toString());
