@@ -54,7 +54,7 @@
                 android:layout_height="137dp"
                 android:layout_weight="1"
                 android:background="#43A047"
-                android:text="gallery"
+                android:text="gggg"
                 android:textSize="18sp" />
 
         </LinearLayout>
