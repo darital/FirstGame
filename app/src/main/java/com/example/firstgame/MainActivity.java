@@ -1,11 +1,14 @@
 package com.example.firstgame;
 
-import androidx.annotation.RequiresApi;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
-import android.os.Build;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -14,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 TextView tvResult;
@@ -24,7 +26,28 @@ Button btnOk;
 int myAnswer;
 int randomNumber;
 Random random;
-int cnt = 5;
+int cnt = 12;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        menu.add("settings");
+        return super.onCreateOptionsMenu(menu);
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case 0:
+                Intent intent = new Intent(MainActivity.this, SettingsActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +61,20 @@ int cnt = 5;
         btnOk.setOnClickListener(this);
         random = new Random();
         randomNumber = random.nextInt(100);
+
+        Intent intent = getIntent();
+        int difficulty = intent.getIntExtra("difficulty", 0);
+        switch (difficulty){
+            case 0:
+                cnt = 12;
+                break;
+            case 1:
+                cnt = 10;
+                break;
+            case 2:
+                cnt = 8;
+                break;
+        }
     }
 
     @Override
@@ -52,7 +89,9 @@ int cnt = 5;
                 if(cnt < 0){
                     etAnswer.setText("");
                     tvResult.setText("Siz yutqazdingiz");
-                    btnOk.setText("Qayta o'ynash");
+
+                    Intent intent = new Intent(MainActivity.this, NewGame.class);
+                    startActivity(intent);
                     break;
                 }
                 myAnswer = Integer.parseInt(etAnswer.getText().toString());
@@ -66,6 +105,7 @@ int cnt = 5;
                     tvResult.setText("TABRIKLAYMAN");
                     btnOk.setText("Qayta o'ynash");
                 }
+                Toast.makeText(this, "Qolgan urinishlaringiz soni " + cnt, Toast.LENGTH_SHORT).show();
                 break;
         }
     }
