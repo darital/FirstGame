@@ -32,7 +32,7 @@ public class SplashActivity extends Activity {
 
             @Override
             public void onFinish() {
-                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                Intent intent = new Intent(SplashActivity.this, Menu.class);
                 startActivity(intent);
                 finish();
             }

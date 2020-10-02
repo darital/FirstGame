@@ -9,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".NewGame" android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"></activity>
+        <activity android:name=".Menu"></activity>
+        <activity android:name=".QuestionGame" />
+        <activity
+            android:name=".NewGame"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
