@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/wallapper4"
-    tools:context=".Login">
+    tools:context=".LoginActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -38,9 +38,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
-                android:hint="Janob bu yerga @mail ni yozing"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Janob @mail ni yozing"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 
@@ -63,9 +62,8 @@
                 android:layout_marginRight="30dp"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="Janob bu yerga parolingizni yozing"
-                android:inputType="textPersonName"
-                android:text="Name" />
+                android:hint="Janob parolingizni yozing"
+                android:inputType="textPersonName" />
 
         </LinearLayout>
 

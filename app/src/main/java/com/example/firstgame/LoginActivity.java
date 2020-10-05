@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class Login extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
     EditText edt1, edt2;
     Button btn1;
 
@@ -31,7 +31,7 @@ public class Login extends AppCompatActivity implements View.OnClickListener {
                 String parol = edt2.getText().toString();
 
                 if (login.equals("darital") && parol.equals("data")) {
-                    Intent intent = new Intent(Login.this, MainActivity.class);
+                    Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                     startActivity(intent);
                     finish();
                 } else {
