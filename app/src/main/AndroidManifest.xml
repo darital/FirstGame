@@ -9,8 +9,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+      
         <activity android:name=".MenuActivity"></activity>
         <activity android:name=".QuestionGame" />
+      
+        <activity
+            android:name=".SettingsActivity"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity
             android:name=".NewGame"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
