@@ -21,7 +21,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         newtonCradleLoading = (NewtonCradleLoading)findViewById(R.id.newton_cradle_loading);
 
-        newtonCradleLoading.setLoadingColor(Color.YELLOW);
+        newtonCradleLoading.setLoadingColor(Color.GREEN);
 
         new CountDownTimer(3000,1000){
 
