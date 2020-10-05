@@ -9,13 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
-        <activity
-            android:name=".SettingsActivity"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
-        <activity
-            android:name=".NewGame"
-            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+        <activity android:name=".Login"></activity>
+        <activity android:name=".NewGame" />
         <activity android:name=".MainActivity" />
         <activity android:name=".SplashActivity">
             <intent-filter>
