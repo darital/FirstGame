@@ -2,6 +2,7 @@ package com.example.firstgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,9 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends Activity implements View.OnClickListener {
     EditText etLogin, etPassword;
-    Button btnLogin;
+    Button btnLogin, btnpass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,11 +22,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         etPassword = (EditText) findViewById(R.id.etPassword);
         btnLogin = (Button) findViewById(R.id.btnLogin);
         btnLogin.setOnClickListener(this);
+        btnpass = (Button) findViewById(R.id.btnpass);
+        btnpass.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
+            case R.id.btnpass:
+                Intent intent2 = new Intent(LoginActivity.this, ForgotPass.class);
+                startActivity(intent2);
+                break;
+
             case R.id.btnLogin:
                 // login: darital
                 // parol: data
@@ -41,6 +49,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     etPassword.setText("");
                     etLogin.setText("");
                 }
+
+
+
 
         }
     }
