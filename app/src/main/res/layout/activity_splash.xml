@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
+    android:background="@drawable/earth"
     tools:context=".SplashActivity">
 
 
@@ -15,9 +15,10 @@
         android:src="@drawable/data"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.696"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.214"
+        app:layout_constraintVertical_bias="0.186"
         tools:src="@drawable/data" />
 
     <com.victor.loading.newton.NewtonCradleLoading
@@ -29,5 +30,20 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView2"
         app:layout_constraintVertical_bias="0.517" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="371dp"
+        android:layout_height="71dp"
+        android:gravity="center_horizontal"
+        android:text="DATA"
+        android:textColor="#C51E88E5"
+        android:textSize="60sp"
+        app:layout_constraintBottom_toTopOf="@+id/newton_cradle_loading"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.496"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.59" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

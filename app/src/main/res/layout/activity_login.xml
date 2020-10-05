@@ -3,47 +3,46 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:float="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/dataspace1"
     android:orientation="vertical"
     android:padding="50dp"
-    android:layout_width="match_parent"
-    android:background="#00897B"
-    android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <ImageView
-        android:id="@+id/imageView2"
+    <TextView
+        android:id="@+id/textView5"
         android:layout_width="match_parent"
-        android:layout_height="163dp"
-        android:src="@drawable/data"
-        android:layout_marginBottom="15dp" />
+        android:layout_height="100dp"
+        android:text="TextView" />
 
-        <EditText
-            android:id="@+id/etLogin"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="20dp"
-            android:background="#FFFFFF"
-            android:ems="10"
-            android:hint="Enter login"
-            android:inputType="textPersonName"
-            android:padding="10dp" />
+    <EditText
+        android:id="@+id/etLogin"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Enter login"
+        android:inputType="textPersonName"
+        android:padding="10dp" />
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="45dp"
-            android:layout_marginBottom="55dp"
-            android:background="#FFFFFF"
-            android:ems="10"
-            android:hint="Enter the password"
-            android:inputType="textPassword"
-            android:padding="10dp" />
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_marginBottom="55dp"
+        android:background="#FFFFFF"
+        android:ems="10"
+        android:hint="Enter the password"
+        android:inputType="textPassword"
+        android:padding="10dp" />
 
-        <Button
-            android:id="@+id/btnLogin"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="#FAFCFA"
-            android:text="login" />
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#FAFCFA"
+        android:text="login" />
 
 </LinearLayout>
