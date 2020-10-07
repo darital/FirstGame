@@ -1,6 +1,7 @@
 package com.example.firstgame;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
@@ -19,26 +20,21 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
     ImageView imageView3;
     TextView textView;
 
-
      @Override
      protected void onCreate(Bundle savedInstanceState) {
          super.onCreate(savedInstanceState);
          setContentView(R.layout.activity_gallery);
-         imageView53 = (ImageView) findViewById(R.id.imageView53);
-         imageView53.setOnClickListener(this);
-         textView = (TextView) findViewById(R.id.textView3);
-         imageView4 = (ImageView) findViewById(R.id.imageView4);
-         imageView4.setOnClickListener(this);
-         imageView5 = (ImageView) findViewById(R.id.imageView5);
-         imageView5.setOnClickListener(this);
-         imageView6 = (ImageView) findViewById(R.id.imageView6);
-         imageView6.setOnClickListener(this);
-         imageView7 = (ImageView) findViewById(R.id.imageView7);
-         imageView7.setOnClickListener(this);
-         imageView8 = (ImageView) findViewById(R.id.imageView8);
-         imageView8.setOnClickListener(this);
-         imageView3 = (ImageView) findViewById(R.id.imageView3);
-         imageView3.setOnClickListener(this);
+         findId();
+         Intent intent = getIntent();
+         String bino = intent.getStringExtra("bino");
+         switch (bino){
+             case "kaltaminor":
+                 textView.setText(R.string.kalta_minor);
+                 break;
+             case "nurullaboysaroyi":
+                 textView.setText(R.string.nurullaboy_s);
+                 break;
+         }
      }
 
      @Override
@@ -66,5 +62,23 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
                  textView.setText(R.string.tosh_xovli);
                  break;
          }
+     }
+
+     private void findId(){
+         imageView53 = (ImageView) findViewById(R.id.imageView53);
+         imageView53.setOnClickListener(this);
+         textView = (TextView) findViewById(R.id.textView3);
+         imageView4 = (ImageView) findViewById(R.id.imageView4);
+         imageView4.setOnClickListener(this);
+         imageView5 = (ImageView) findViewById(R.id.imageView5);
+         imageView5.setOnClickListener(this);
+         imageView6 = (ImageView) findViewById(R.id.imageView6);
+         imageView6.setOnClickListener(this);
+         imageView7 = (ImageView) findViewById(R.id.imageView7);
+         imageView7.setOnClickListener(this);
+         imageView8 = (ImageView) findViewById(R.id.imageView8);
+         imageView8.setOnClickListener(this);
+         imageView3 = (ImageView) findViewById(R.id.imageView3);
+         imageView3.setOnClickListener(this);
      }
  }
