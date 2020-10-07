@@ -35,7 +35,7 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
                  img_khiwa1.setImageResource(R.drawable.nurulla_1);
                  img_khiwa2.setImageResource(R.drawable.nurulla_2);
                  img_khiwa3.setImageResource(R.drawable.nurulla_3);
-                 img_khiwa4.setImageResource(R.drawable.nurullaboysaroyi);
+                 img_khiwa4.setImageResource(R.drawable.nurulla_4);
                  break;
          }
      }
@@ -73,7 +73,7 @@ public class GalleryActivity extends AppCompatActivity implements View.OnClickLi
                          imageMain.setImageResource(R.drawable.nurulla_3);
                          break;
                      case  R.id.img_khiwa4:
-                         imageMain.setImageResource(R.drawable.nurullaboysaroyi);
+                         imageMain.setImageResource(R.drawable.nurulla_4);
                          break;
 
                  }
