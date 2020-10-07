@@ -1,3 +1,30 @@
 <resources>
     <string name="app_name">FirstGame</string>
+
+    <string name="ichon_qala">\t\tXalqaro sayyohlik markazlaridan biri hisoblangan dunyoning eng qadimgi shaharlaridan biri Xiva ochiq osmon ostidagi muzey sifatida tan olinmagan. Miloddan avvalgi VI-V asrlardan 20-asrgacha bolgan 122 dan ortiq arxeologik yodgorlik va memoriy yodgorliklar davlat tomonidan muhofaza qilingan va muhofaza qilingan.
+Ayniqsa, Xivaning Ichan-Qala qismi Markaziy Osiyoda saqlanib qolgan monumental yodgorlikdir, uning taqdiri va memoriy yodgorliklari dunyodagi eng qadimiy madaniy meros - Xorazmning tarixiy va madaniy rivojlanishi bilan chambarchas bogliqdir.
+Xiva - Xorazm memorlari sanati va ijodi uchun, Sharqning qadimgi madaniyatlari beshigi bolgan Xorazmning kop asrlik memorchilik ananalarini meros qilib olgan ijodiy harakatdir.
+    </string>
+
+    <string name="kalta_minor">\t\tKaltaminor — Xivadagi memoriy yodgorlik. Muhammad Aminxon madrasasining old tomonida joylashgan. Orta Osiyoda eng katta va baland qilib qurish moljallangan. 1852 yilda qurila boshlanib 1855 yilda xonning vafoti tufayli chala qolgan. Hozir Kaltaminorning balandligi 26 m, asosining diametri — 14.2 m
+    </string>
+
+    <string name="koxna_ark">\t\tKohna ark — Xivadagi memoriy yodgorlik. Ichan qalaning garbiy qismida joylashgan. Kohna Ark dagi binolar, asosan, 17-asrda Anoshaxonning ogli Arangxon davrida usta, shoir Mavlono Vafoiy tomonidan qurilgan. 1804—06 yillarda qayta tiklab tamir etilgan.
+    </string>
+
+    <string name="mamirxon_m">\t\tMuhammad aminxon madrasasi — Xivadagi memoriy yodgorlik. Muhammad Aminxon qurdirgan. Ichan qalaning garbiy qismida joylashgan. Madrasa ikki qavatli. Birinchi qavatidagi hujralar dahlizli, ikkinchi qavatdagilar ayvonli. Bu uslub Xiva madrasalari memorligida ilk bor shu binoda qollanilgan.
+    </string>
+
+    <string name="nurullaboy_s">\t\tNurullaboy saroyi - Xivadagi memoriy yodgorlik. Asfandiyorxonning sobiq rasmiy qabulxonasi (20-asr). Bu saroy-bogni Xiva xoni Muhammad Rahimxon II Feruz ogli Asfandiyorxon uchun qurdirgan (Nurullaboy degan shaxsning bogi orniga qurilgani uchun Nurullaboy saroyi deb ataladi). Nurullaboy saroyi 9 ta katta-kichik xonalar, darvozaxona, saroy, qabulxona, arzxona, Madrasa, xizmatchilar uchun turar joy, bog, gulzorli hovlilardan iborat
+    </string>
+
+    <string name="pahlavon_m">\t\tPahlavon Mahmud majmuasi, Pahlavon Mahmud maqbarasi, Polvon ota maqbarasi — Xivadagi memoriy yodgorlik (1810—1913). Maqbara majmuasining umumiy hajmi 50x30 m bolib, dastlab Pahlavon Mahmud qabri ustiga 1664 yilda mojaz sinchkori imorat qurilgan. Darvozaxona eshigidagi yozuvga kora, P. Pahlavon Mahmud majmuasining qurilish sanasi 1701 yilda Shohniyozxon qurdirgan vaqtdan hisoblanadi.
+    </string>
+
+    <string name="tosh_xovli">\t\tToshhovli haram saroyi — Sharq hukmdorlari ichida ozining hashamdorligi, muhtashamligi bilan ajralib turuvchi Xiva xonlarining mehmonlarni kutish, xonning turar joyi, haramlari bolgan. Shu bois Xivada bir qancha xon saroylari bugungi kungacha oz salobatini yoqotmagan desak mubolaga bolmaydi.
+Ana shunday mashhur saroylardan biri Olloqulixonning (Tosh saroyi) sanaladi. Toshhovli saroyi (80x80 m) tashkil etadi. Bu memoriy inshoot XIX asr boshlarida qurilgan, uning tashqi korinishi xuddi Kon arkasini yodga soladi. Mazkur saroy 1830 – 1838 yillarda Xiva xoni Olloqulixon tomonidan (1794–1842 yillarda yashab otgan).
+    </string>
+
+
 </resources>
+
