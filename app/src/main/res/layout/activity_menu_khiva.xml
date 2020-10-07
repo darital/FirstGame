@@ -4,7 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MenuKhivaActivity">
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
     <TableLayout
         android:layout_width="match_parent"
@@ -12,7 +17,7 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/layout1"
@@ -38,13 +43,13 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="match_parent">
 
             <FrameLayout
                 android:id="@+id/layout2"
                 android:layout_width="match_parent"
-                android:layout_margin="5dp"
                 android:layout_height="200dp"
+                android:layout_margin="5dp"
                 android:layout_weight="1"
                 android:background="@drawable/nurullaboysaroyi"
                 android:clickable="true"
@@ -64,10 +69,71 @@
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/aminxon1">
+
+                <TextView
+                    android:id="@+id/textView6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:text="Muhammad Aminxon"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24dp" />
+            </FrameLayout>
+        </TableRow>
 
         <TableRow
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/kohnaark">
+
+                <TextView
+                    android:id="@+id/textView9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:text="Ko'hna Ark"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+            </FrameLayout>
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_margin="5dp"
+                android:layout_weight="1"
+                android:background="@drawable/pahlovonmah">
+
+                <TextView
+                    android:id="@+id/textView10"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom|left"
+                    android:text="Pahlavon Mahmud"
+                    android:textColor="#FFFFFF"
+                    android:textSize="24sp" />
+            </FrameLayout>
+
+        </TableRow>
     </TableLayout>
+    </ScrollView>
 </LinearLayout>
