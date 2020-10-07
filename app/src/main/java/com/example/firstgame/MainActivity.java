@@ -28,13 +28,11 @@ int randomNumber;
 Random random;
 int cnt = 12;
 
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         menu.add("settings");
         return super.onCreateOptionsMenu(menu);
     }
-
 
 
     @Override

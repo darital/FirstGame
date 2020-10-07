@@ -23,7 +23,6 @@ public class NewGame extends Activity implements View.OnClickListener {
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnCancel.setOnClickListener(this);
 
-
     }
 
     @Override
