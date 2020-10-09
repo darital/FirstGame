@@ -9,6 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -28,13 +29,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_person);
         findId();
-
-        // создаем объект для создания и управления версиями БД
-        dbHelper = new DBHelper(this);
-
     }
-
-
 
 
     private void findId(){
@@ -49,6 +44,8 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         btnAdd.setOnClickListener(this);
         btnRead.setOnClickListener(this);
         btnClear.setOnClickListener(this);
+        // создаем объект для создания и управления версиями БД
+        dbHelper = new DBHelper(this);
     }
 
     @Override
@@ -66,9 +63,12 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
 
         switch (view.getId()) {
             case R.id.btnAdd:
+                if(TextUtils.isEmpty(etName.getText())){
+                    Toast.makeText(this, "Ismingizni  kiritmadingiz", Toast.LENGTH_SHORT).show();
+                    break;
+                }
                 Log.d(LOG_TAG, "--- Insert in mytable: ---");
                 // подготовим данные для вставки в виде пар: наименование столбца - значение
-
                 cv.put("name", name);
                 cv.put("surname", surname);
                 cv.put("phone", phone);
