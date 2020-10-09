@@ -19,7 +19,7 @@ import android.widget.Toast;
 public class AboutPerson extends AppCompatActivity implements View.OnClickListener {
     EditText etName, etSurname, etPhone;
     Button btnAdd, btnRead, btnClear;
-    DBHelper dbHelper;
+    public DBHelper dbHelper;
     String LOG_TAG = "my_log";
     TextView textView;
 
@@ -123,7 +123,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         dbHelper.close();
     }
 
-    class DBHelper extends SQLiteOpenHelper {
+    static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {
             // конструктор суперкласса
@@ -140,7 +140,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                     + "surname text,"
                     + "phone text" + ");");
         }
-
+//  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);
         @Override
         public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 
