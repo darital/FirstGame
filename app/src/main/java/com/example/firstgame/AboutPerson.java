@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AboutPerson extends AppCompatActivity implements View.OnClickListener {
-    EditText etName, etSurname, etPhone;
+    EditText etName, etSurname, etPhone, etEmail, etAge;
     Button btnAdd, btnRead, btnClear;
     DBHelper dbHelper;
     String LOG_TAG = "my_log";
@@ -42,6 +42,8 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         etSurname = (EditText) findViewById(R.id.etSurname);
         etPhone = (EditText) findViewById(R.id.etPhone);
         textView = (TextView) findViewById(R.id.textView4);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etAge = (EditText) findViewById(R.id.etAge);
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRead = (Button) findViewById(R.id.btnRead);
@@ -60,6 +62,8 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         String name = etName.getText().toString();
         String surname = etSurname.getText().toString();
         String phone = etPhone.getText().toString();
+        String email = etEmail.getText().toString();
+        String age = etAge.getText().toString();
 
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -72,12 +76,17 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                 cv.put("name", name);
                 cv.put("surname", surname);
                 cv.put("phone", phone);
+                cv.put("email", email);
+                cv.put("phone", age);
+
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("mytable", null, cv);
                 Log.d("my_log", "row inserted, ID = " + rowID);
                 etName.setText("");
                 etSurname.setText("");
                 etPhone.setText("");
+                etEmail.setText("");
+                etAge.setText("");
                 break;
             case R.id.btnRead:
                 Log.d(LOG_TAG, "--- Rows in mytable: ---");
@@ -93,13 +102,17 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                     int nameColIndex = c.getColumnIndex("name");
                     int surnameColIndex = c.getColumnIndex("surname");
                     int phoneColIndex = c.getColumnIndex("phone");
+                    int emailColIndex = c.getColumnIndex("email");
+                    int ageColIndex = c.getColumnIndex("age");
 
                     do {
                         // получаем значения по номерам столбцов и пишем все в лог
                         String msg = "ID = " + c.getInt(idColIndex) +
                                 ", name = " + c.getString(nameColIndex) +
                                 ", surname = " + c.getString(surnameColIndex) +
-                                ", phone = " + c.getString(phoneColIndex);
+                                ", phone = " + c.getString(phoneColIndex) +
+                                ", email = " + c.getString(emailColIndex) +
+                                ", age = " + c.getString(ageColIndex);
                         Log.d(LOG_TAG, msg);
                         Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                         textView.setText(msg);
@@ -123,7 +136,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         dbHelper.close();
     }
 
-    class DBHelper extends SQLiteOpenHelper {
+    static class DBHelper extends SQLiteOpenHelper {
 
         public DBHelper(Context context) {
             // конструктор суперкласса
@@ -138,7 +151,9 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                     + "id integer primary key autoincrement,"
                     + "name text,"
                     + "surname text,"
-                    + "phone text" + ");");
+                    + "phone text,"
+                    + "email text,"
+                    + "age text"+ ");");
         }
 
         @Override
