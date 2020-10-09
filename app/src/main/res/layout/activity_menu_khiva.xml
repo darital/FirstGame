@@ -34,6 +34,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
+                    android:paddingLeft="130dp"
                     android:text="Kalta MInor"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp" />
@@ -60,6 +61,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|left"
+                    android:paddingLeft="110dp"
                     android:text="Nurullaboy Saroyi"
                     android:textColor="#FFFFFF"
                     android:textSize="24sp" />
