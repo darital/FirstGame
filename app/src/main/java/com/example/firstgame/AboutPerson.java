@@ -13,12 +13,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 public class AboutPerson extends AppCompatActivity implements View.OnClickListener {
     EditText etName, etSurname, etPhone;
     Button btnAdd, btnRead, btnClear;
     DBHelper dbHelper;
     String LOG_TAG = "my_log";
+    TextView textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +41,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         etName = (EditText) findViewById(R.id.etName);
         etSurname = (EditText) findViewById(R.id.etSurname);
         etPhone = (EditText) findViewById(R.id.etPhone);
+        textView = (TextView) findViewById(R.id.textView4);
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRead = (Button) findViewById(R.id.btnRead);
@@ -92,11 +96,13 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
 
                     do {
                         // получаем значения по номерам столбцов и пишем все в лог
-                        Log.d(LOG_TAG,
-                                "ID = " + c.getInt(idColIndex) +
-                                        ", name = " + c.getString(nameColIndex) +
-                                        ", surname = " + c.getString(surnameColIndex) +
-                                        ", phone = " + c.getString(phoneColIndex));
+                        String msg = "ID = " + c.getInt(idColIndex) +
+                                ", name = " + c.getString(nameColIndex) +
+                                ", surname = " + c.getString(surnameColIndex) +
+                                ", phone = " + c.getString(phoneColIndex);
+                        Log.d(LOG_TAG, msg);
+                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+                        textView.setText(msg);
                         // переход на следующую строку
                         // а если следующей нет (текущая - последняя), то false - выходим из цикла
                     } while (c.moveToNext());
