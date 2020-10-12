@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".AboutPerson"></activity>
+        <activity android:name=".WelcomeActivity"></activity>
         <activity android:name=".SplashActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".QuestionGame" />
@@ -20,7 +20,7 @@
             android:name=".NewGame"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".WelcomeActivity">
+        <activity android:name=".AboutPerson">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

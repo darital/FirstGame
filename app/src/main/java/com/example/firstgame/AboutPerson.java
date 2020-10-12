@@ -8,11 +8,14 @@ import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,6 +24,13 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
     Button btnAdd, btnRead, btnClear;
     public DBHelper dbHelper;
     String LOG_TAG = "my_log";
+    String[] names = new String[200];
+    String[] surnames = new String[200];
+    String[] phones = new String[200];
+
+    int cnt = 0;
+    LinearLayout linLayout;
+    LayoutInflater ltInflater;
     TextView textView;
 
     @Override
@@ -31,6 +41,9 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
 
         // создаем объект для создания и управления версиями БД
         dbHelper = new DBHelper(this);
+        linLayout = (LinearLayout) findViewById(R.id.linlayout);
+
+        ltInflater = getLayoutInflater();
 
     }
 
@@ -41,7 +54,6 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         etName = (EditText) findViewById(R.id.etName);
         etSurname = (EditText) findViewById(R.id.etSurname);
         etPhone = (EditText) findViewById(R.id.etPhone);
-        textView = (TextView) findViewById(R.id.textView4);
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRead = (Button) findViewById(R.id.btnRead);
@@ -80,6 +92,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                 etPhone.setText("");
                 break;
             case R.id.btnRead:
+                // TODO elementlar qayta qo'shilmasin
                 Log.d(LOG_TAG, "--- Rows in mytable: ---");
                 // делаем запрос всех данных из таблицы mytable, получаем Cursor
                 Cursor c = db.query("mytable", null, null, null, null, null, null);
@@ -101,14 +114,36 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                                 ", surname = " + c.getString(surnameColIndex) +
                                 ", phone = " + c.getString(phoneColIndex);
                         Log.d(LOG_TAG, msg);
-                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
-                        textView.setText(msg);
+//                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                         // переход на следующую строку
+                        names[cnt] =  c.getString(nameColIndex);
+                        surnames[cnt] = c.getString(surnameColIndex);
+                        phones[cnt] = c.getString(phoneColIndex);
+                        cnt++;
                         // а если следующей нет (текущая - последняя), то false - выходим из цикла
                     } while (c.moveToNext());
                 } else
                     Log.d(LOG_TAG, "0 rows");
                 c.close();
+                int[] colors = new int[2];
+                 colors[0] = Color.parseColor("#559966CC");
+                 colors[1] = Color.parseColor("#55336699");
+
+                for (int i = 0; i < cnt; i++) {
+                    Log.d("myLogs", "i = " + i);
+                    View item = ltInflater.inflate(R.layout.item, linLayout, false);
+                    TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
+                    tvNumber.setText(""+(i+1));
+                    TextView tvName = (TextView) item.findViewById(R.id.tvName);
+                    tvName.setText("Ism: " + names[i]);
+                    TextView tvSurname = (TextView) item.findViewById(R.id.tvSurname);
+                    tvSurname.setText("Familiya: " + surnames[i]);
+                    TextView tvPhone = (TextView) item.findViewById(R.id.tvPhone);
+                    tvPhone.setText("Telefon: " + (phones[i]));
+                    item.setBackgroundColor(colors[i % 2]);
+                    linLayout.addView(item);
+                }
+
                 break;
 
             case R.id.btnClear:
@@ -123,27 +158,4 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         dbHelper.close();
     }
 
-    static class DBHelper extends SQLiteOpenHelper {
-
-        public DBHelper(Context context) {
-            // конструктор суперкласса
-            super(context, "personDB", null, 1);
-        }
-
-        @Override
-        public void onCreate(SQLiteDatabase db) {
-            Log.d("my_log", "--- onCreate database ---");
-            // создаем таблицу с полями
-            db.execSQL("create table mytable ("
-                    + "id integer primary key autoincrement,"
-                    + "name text,"
-                    + "surname text,"
-                    + "phone text" + ");");
-        }
-//  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);
-        @Override
-        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
-        }
-    }
 }

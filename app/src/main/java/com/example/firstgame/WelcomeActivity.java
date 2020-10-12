@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class WelcomeActivity extends AppCompatActivity {
 TextView textWelcome;
-    AboutPerson.DBHelper dbHelper;
+    DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,7 +21,7 @@ TextView textWelcome;
         textWelcome = (TextView) findViewById(R.id.textWelcome);
 
 
-        dbHelper = new AboutPerson.DBHelper(this);
+        dbHelper = new DBHelper(this);
 
         SQLiteDatabase db = dbHelper.getWritableDatabase();
 

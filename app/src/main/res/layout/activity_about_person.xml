@@ -63,10 +63,19 @@
                 android:text="clear" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/textView4"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:id="@+id/linlayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+            </LinearLayout>
+        </ScrollView>
+
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
