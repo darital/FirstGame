@@ -9,12 +9,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         // конструктор суперкласса
-        super(context, "personDB", null, 1);
+        super(context, "ourNoteDB", null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("MyTag" , "--- onCreate database ---");
+        Log.d("Hisobot:" , "--- onCreate database ---");
         // tablitsa yaratamiz
         db.execSQL("create table noteTable ("
                 + "id integer primary key autoincrement,"
