@@ -66,13 +66,13 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
         if (cnt != 0)
             for (int i = 0; i < cnt; i++) {
                 final int x = i;
-                View my_item = ltInflater.inflate(R.layout.item, linlayout, false);
+                View my_item = ltInflater.inflate(R.layout.item_note, linlayout, false);
 
                 TextView textNote = (TextView) my_item.findViewById(R.id.tvNote);
                 TextView textDate = (TextView) my_item.findViewById(R.id.tvDate);
                 Log.d(myLog, notes[i]);
                 textNote.setText(notes[i]);
-//                textDate.setText(date[i]);
+                textDate.setText(date[i]);
                 linlayout.addView(my_item);
 
                 // 02.09.2020
