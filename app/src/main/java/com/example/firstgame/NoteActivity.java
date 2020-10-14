@@ -72,7 +72,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 TextView textDate = (TextView) my_item.findViewById(R.id.tvDate);
                 Log.d(myLog, notes[i]);
                 textNote.setText(notes[i]);
-                textDate.setText(date[i]);
+//                textDate.setText(date[i]);
                 linlayout.addView(my_item);
 
                 // 02.09.2020
