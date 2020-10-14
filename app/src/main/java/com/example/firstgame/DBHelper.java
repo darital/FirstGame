@@ -14,13 +14,12 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        Log.d("my_log", "--- onCreate database ---");
-        // создаем таблицу с полями
-        db.execSQL("create table mytable ("
+        Log.d("MyTag" , "--- onCreate database ---");
+        // tablitsa yaratamiz
+        db.execSQL("create table noteTable ("
                 + "id integer primary key autoincrement,"
-                + "name text,"
-                + "surname text,"
-                + "phone text" + ");");
+                + "date text,"
+                + "note text" + ");");
     }
     //  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);
     @Override
