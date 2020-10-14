@@ -27,7 +27,7 @@ public class AddNote extends AppCompatActivity implements View.OnClickListener {
         setContentView(R.layout.activity_add_note);
         date = new Date();
         SimpleDateFormat formatForDateNow = new SimpleDateFormat("dd.MM.yyyy");
-//        mydate = formatForDateNow.for
+        mydate = formatForDateNow.format(date);
         etNote = (EditText) findViewById(R.id.etNote);
         btnOk = (Button) findViewById(R.id.btnOk);
         btnOk.setOnClickListener(this);
