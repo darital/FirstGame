@@ -76,8 +76,11 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                 linlayout.addView(my_item);
 
                 // 02.09.2020
-                final Toast toast = Toast.makeText(getApplicationContext(), "clicked one note", Toast.LENGTH_SHORT);
+                final Toast toast = Toast.makeText(getApplicationContext(), "salom " + notes[i], Toast.LENGTH_SHORT);
+                // ko'p vaqt bosilganda chiqadigan menyu
                 registerForContextMenu(my_item);
+
+                // element bir marta bosilsa bo'ladigan hodisa
                 my_item.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

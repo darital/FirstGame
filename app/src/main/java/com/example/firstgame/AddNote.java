@@ -47,7 +47,7 @@ public class AddNote extends AppCompatActivity implements View.OnClickListener {
                 // malumotni saqlovchi obyekt
                 ContentValues cv = new ContentValues();
 
-                String note = etNote.getText().toString();;
+                String note = etNote.getText().toString().trim();;
 
                 //malumotlar bazasiga ulanamiz
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
