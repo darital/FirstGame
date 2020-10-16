@@ -67,7 +67,7 @@ public class EditNote extends AppCompatActivity implements View.OnClickListener 
 
                 //malumotni yozamiz
                 long updatedCount = db.update("noteTable", cv, "id = ?",
-                        new String[] { "" + itemId });;
+                        new String[] { "" + itemId });
                 Log.d(myLog , "row updated, ID = " + updatedCount);
                 finish();
                 Intent intent2 = new Intent(EditNote.this, NoteActivity.class);

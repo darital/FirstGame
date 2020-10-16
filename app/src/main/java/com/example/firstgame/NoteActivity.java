@@ -101,7 +101,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                                     case 1:
                                         Intent intent = new Intent(NoteActivity.this, EditNote.class);
                                         intent.putExtra("noteText", notes[itemID]);
-                                        intent.putExtra("noteId", itemID);
+                                        intent.putExtra("noteId", notesID[itemID]);
                                         startActivity(intent);
 
                                         break;

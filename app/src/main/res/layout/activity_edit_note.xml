@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="350dp"
     android:layout_height="300dp"
-    tools:context=".AddNote">
+    tools:context=".EditNote">
 
     <EditText
         android:id="@+id/etNote"
