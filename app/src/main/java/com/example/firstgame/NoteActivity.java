@@ -1,164 +1,157 @@
 package com.example.firstgame;
 
-import android.content.Intent;
+import android.app.Activity;
+import android.content.ContentValues;
+import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.ContextMenu;
-import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.View.OnClickListener;
+import android.widget.Button;
+import android.widget.EditText;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+public class NoteActivity extends Activity implements OnClickListener {
 
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
+    final String LOG_TAG = "myLogs";
 
-public class NoteActivity extends AppCompatActivity implements View.OnClickListener {
-    String[] notes = new String[500];
-    int[] notesID = new int[500];
-    String[] date = new String[500];
+    Button btnAdd, btnRead, btnClear, btnUpd, btnDel;
+    EditText etName, etEmail, etID;
+
     DBHelper dbHelper;
-    int cnt = 0;
-    final String myLog = "Mylog";
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    /** Called when the activity is first created. */
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_note);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
+        btnAdd = (Button) findViewById(R.id.btnAdd);
+        btnAdd.setOnClickListener(this);
+
+        btnRead = (Button) findViewById(R.id.btnRead);
+        btnRead.setOnClickListener(this);
+
+        btnClear = (Button) findViewById(R.id.btnClear);
+        btnClear.setOnClickListener(this);
+
+        btnUpd = (Button) findViewById(R.id.btnUpd);
+        btnUpd.setOnClickListener(this);
+
+        btnDel = (Button) findViewById(R.id.btnDel);
+        btnDel.setOnClickListener(this);
+
+        etName = (EditText) findViewById(R.id.etName);
+        etEmail = (EditText) findViewById(R.id.etEmail);
+        etID = (EditText) findViewById(R.id.etID);
+
+        // create object for database creation and version control
         dbHelper = new DBHelper(this);
-        final SQLiteDatabase db = dbHelper.getWritableDatabase();
-        // kursordan foydalanib tablitsadagoi har bir elementni koramiz
-        Cursor c = db.query("noteTable", null, null, null, null, null, null);
-        if (c.moveToFirst()) {
-            int idColIndex = c.getColumnIndex("id");
-            int noteColIndex = c.getColumnIndex("note");
-            int dateColIndex = c.getColumnIndex("date");
-            do {
-                Log.d(myLog,
-                        "ID = " + c.getInt(idColIndex) +
-                                ", note =" + c.getString(noteColIndex) +
-                                ", date =" + c.getString(dateColIndex)
-                );
-                notesID[cnt] = c.getInt(idColIndex);
-                notes[cnt] = c.getString(noteColIndex);
-                date[cnt] = c.getString(dateColIndex);
-                cnt++;
-            } while (c.moveToNext());
+    }
 
-        } else {
-            Log.d(myLog, "0 rows");
+    public void onClick(View v) {
+
+        // create object for data
+        ContentValues cv = new ContentValues();
+
+        // get data from editText fields
+        String name = etName.getText().toString();
+        String email = etEmail.getText().toString();
+        String id = etID.getText().toString();
+
+        // connect to database
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        switch (v.getId()) {
+            case R.id.btnAdd:
+                Log.d(LOG_TAG, "--- Insert in mytable: ---");
+                // create data for insertion in a form of pairs: column name and value
+                cv.put("name", name);
+                cv.put("email", email);
+                // insert row and get it’s ID
+                long rowID = db.insert("mytable", null, cv);
+                Log.d(LOG_TAG, "row inserted, ID = " + rowID);
+                break;
+            case R.id.btnRead:
+                Log.d(LOG_TAG, "--- Rows in mytable: ---");
+                // make a request for all data from mytable, get Cursor
+                Cursor c = db.query("mytable", null, null, null, null, null, null);
+
+                // put the cursor to the first row
+                // false will be returned in case there are no rows
+                if (c.moveToFirst()) {
+
+                    // determine the column numbers by names
+                    int idColIndex = c.getColumnIndex("id");
+                    int nameColIndex = c.getColumnIndex("name");
+                    int emailColIndex = c.getColumnIndex("email");
+
+                    do {
+                        // get values according to column numbers and put them to log
+                        Log.d(LOG_TAG,
+                                "ID = " + c.getInt(idColIndex) + ", name = "
+                                        + c.getString(nameColIndex) + ", email = "
+                                        + c.getString(emailColIndex));
+                        // moving to the next row
+                        // if the current row is the last and there are no rows we get false and leave the statement
+                    } while (c.moveToNext());
+                } else
+                    Log.d(LOG_TAG, "0 rows");
+                c.close();
+                break;
+            case R.id.btnClear:
+                Log.d(LOG_TAG, "--- Clear mytable: ---");
+                // delete all rows
+                int clearCount = db.delete("mytable", null, null);
+                Log.d(LOG_TAG, "deleted rows count = " + clearCount);
+                break;
+            case R.id.btnUpd:
+                if (id.equalsIgnoreCase("")) {
+                    break;
+                }
+                Log.d(LOG_TAG, "--- Update mytable: ---");
+                // prepare values for update
+                cv.put("name", name);
+                cv.put("email", email);
+                // update by id
+                int updCount = db.update("mytable", cv, "id = ?",
+                        new String[] { id });
+                Log.d(LOG_TAG, "updated rows count = " + updCount);
+                break;
+            case R.id.btnDel:
+                if (id.equalsIgnoreCase("")) {
+                    break;
+                }
+                Log.d(LOG_TAG, "--- Delete from mytable: ---");
+                // delete by id
+                int delCount = db.delete("mytable", "id = " + id, null);
+                Log.d(LOG_TAG, "deleted rows count = " + delCount);
+                break;
         }
-        c.close();
-
-        LinearLayout linlayout = (LinearLayout) findViewById(R.id.linlayout);
-
-        final LayoutInflater ltInflater = getLayoutInflater();
-
-        if (cnt != 0)
-            for (int i = 0; i < cnt; i++) {
-                final int itemID = i;
-                View my_item = ltInflater.inflate(R.layout.item_note, linlayout, false);
-
-                TextView textNote = (TextView) my_item.findViewById(R.id.tvNote);
-                TextView textDate = (TextView) my_item.findViewById(R.id.tvDate);
-                Log.d(myLog, notes[i]);
-                textNote.setText(notes[i]);
-                textDate.setText(date[i]);
-                linlayout.addView(my_item);
-
-                // 02.09.2020
-                final Toast toast = Toast.makeText(getApplicationContext(), "salom " + notes[i], Toast.LENGTH_SHORT);
-                // ko'p vaqt bosilganda chiqadigan menyu
-                registerForContextMenu(my_item);
-
-                // element bir marta bosilsa bo'ladigan hodisa
-                my_item.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        toast.show();
-                    }
-                });
-                my_item.setOnCreateContextMenuListener(new View.OnCreateContextMenuListener() {
-                    @Override
-                    public void onCreateContextMenu(ContextMenu menu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
-                        menu.add(0, 1, 0, "Change the note");
-                        menu.add(0, 2, 0, "Delete the note");
-                        MenuItem.OnMenuItemClickListener listener = new MenuItem.OnMenuItemClickListener() {
-                            @Override
-                            public boolean onMenuItemClick(MenuItem menuItem) {
-                                onContextItemSelected(menuItem);
-                                int menuIndex = menuItem.getItemId();
-                                switch (menuIndex) {
-                                    case 1:
-                                        Intent intent = new Intent(NoteActivity.this, EditNote.class);
-                                        intent.putExtra("noteText", notes[itemID]);
-                                        intent.putExtra("noteId", notesID[itemID]);
-                                        startActivity(intent);
-
-                                        break;
-
-                                    case 2:
-                                        final Toast toast2 = Toast.makeText(getApplicationContext(), "try to delete", Toast.LENGTH_SHORT);
-                                        toast2.show();
-                                        int delCount = db.delete("noteTable", "id =" + notesID[itemID], null);
-                                        Log.d(myLog, "deleted rows count = " + delCount);
-                                        finish();
-                                        startActivity(getIntent());
-                                        break;
-                                }
-                                return true;
-                            }
-                        };
-                        for (int i = 0, n = menu.size(); i < n; i++)
-                            menu.getItem(i).setOnMenuItemClickListener(listener);
-                    }
-                });
-
-            }
-
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(NoteActivity.this, AddNote.class);
-                startActivity(intent);
-            }
-        });
+        // close database connection
+        dbHelper.close();
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
+    class DBHelper extends SQLiteOpenHelper {
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        public DBHelper(Context context) {
+            // superclass constructor
+            super(context, "myDB", null, 1);
         }
 
-        return super.onOptionsItemSelected(item);
+        public void onCreate(SQLiteDatabase db) {
+            Log.d(LOG_TAG, "--- onCreate database ---");
+            // create table with columns
+            db.execSQL("create table mytable ("
+                    + "id integer primary key autoincrement,"
+                    + "name text,"
+                    + "email text" + ");");
+        }
+
+        public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+        }
     }
 
-    @Override
-    public void onClick(View view) {
-
-    }
 }

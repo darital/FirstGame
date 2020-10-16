@@ -60,8 +60,8 @@ public class AddNote extends AppCompatActivity implements View.OnClickListener {
                 long rowID = db.insert("noteTable", null, cv);
                 Log.d(myLog , "row inserted, ID = " + rowID);
                 finish();
-                Intent intent = new Intent(AddNote.this, NoteActivity.class);
-                startActivity(intent);
+               // Intent intent = new Intent(AddNote.this, NoteActivity.class);
+               // startActivity(intent);
                 break;
         }
     }
