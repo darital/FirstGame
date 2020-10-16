@@ -65,7 +65,7 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
 
         if (cnt != 0)
             for (int i = 0; i < cnt; i++) {
-                final int x = i;
+                final int itemID = i;
                 View my_item = ltInflater.inflate(R.layout.item_note, linlayout, false);
 
                 TextView textNote = (TextView) my_item.findViewById(R.id.tvNote);
@@ -99,13 +99,17 @@ public class NoteActivity extends AppCompatActivity implements View.OnClickListe
                                 int menuIndex = menuItem.getItemId();
                                 switch (menuIndex) {
                                     case 1:
+                                        Intent intent = new Intent(NoteActivity.this, EditNote.class);
+                                        intent.putExtra("noteText", notes[itemID]);
+                                        intent.putExtra("noteId", itemID);
+                                        startActivity(intent);
 
                                         break;
 
                                     case 2:
                                         final Toast toast2 = Toast.makeText(getApplicationContext(), "try to delete", Toast.LENGTH_SHORT);
                                         toast2.show();
-                                        int delCount = db.delete("noteTable", "id =" + notesID[x], null);
+                                        int delCount = db.delete("noteTable", "id =" + notesID[itemID], null);
                                         Log.d(myLog, "deleted rows count = " + delCount);
                                         finish();
                                         startActivity(getIntent());

@@ -9,11 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".WelcomeActivity"></activity>
+        <activity android:name=".EditNote"></activity>
+        <activity android:name=".WelcomeActivity" />
         <activity android:name=".SplashActivity" />
         <activity android:name=".MenuActivity" />
         <activity android:name=".AboutPerson" />
-        <activity android:name=".AddNote" android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"></activity>
+        <activity
+            android:name=".AddNote"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity android:name=".QuestionGame" />
         <activity
             android:name=".SettingsActivity"
@@ -22,7 +25,8 @@
             android:name=".NewGame"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".NoteActivity"
+        <activity
+            android:name=".NoteActivity"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
