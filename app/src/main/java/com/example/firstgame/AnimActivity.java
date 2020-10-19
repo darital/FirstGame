@@ -8,6 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 public class AnimActivity extends AppCompatActivity {
@@ -18,7 +19,7 @@ public class AnimActivity extends AppCompatActivity {
     final int MENU_ROTATE_ID = 4;
     final int MENU_COMBO_ID = 5;
 
-    TextView tv;
+    ImageView imageView;
 
     /** Called when the activity is first created. */
     @Override
@@ -26,9 +27,9 @@ public class AnimActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_anim);
 
-        tv = (TextView) findViewById(R.id.tv);
+        imageView = (ImageView) findViewById(R.id.imageView);
         // регистрируем контекстное меню для компонента tv
-        registerForContextMenu(tv);
+        registerForContextMenu(imageView);
     }
 
     @Override
@@ -36,7 +37,7 @@ public class AnimActivity extends AppCompatActivity {
                                     ContextMenu.ContextMenuInfo menuInfo) {
         // TODO Auto-generated method stub
         switch (v.getId()) {
-            case R.id.tv:
+            case R.id.imageView:
                 // добавляем пункты
                 menu.add(0, MENU_ALPHA_ID, 0, "alpha");
                 menu.add(0, MENU_SCALE_ID, 0, "scale");
@@ -71,7 +72,7 @@ public class AnimActivity extends AppCompatActivity {
                 break;
         }
         // запускаем анимацию для компонента tv
-        tv.startAnimation(anim);
+        imageView.startAnimation(anim);
         return super.onContextItemSelected(item);
     }
 }
