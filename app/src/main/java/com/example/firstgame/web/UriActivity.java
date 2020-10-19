@@ -41,7 +41,7 @@ public class UriActivity extends AppCompatActivity implements View.OnClickListen
             case R.id.btnMap:
                 intent = new Intent();
                 intent.setAction(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("geo:37.7749,-122.4194"));
+                intent.setData(Uri.parse("https://goo.gl/maps/TFTnov7vEMpFKnAP6"));
 //                intent.setPackage("com.google.android.apps.maps");
                 startActivity(intent);
                 break;
