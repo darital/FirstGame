@@ -2,6 +2,7 @@ package com.example.firstgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.ContextMenu;
 import android.view.MenuItem;
@@ -18,7 +19,7 @@ public class AnimActivity extends AppCompatActivity {
     final int MENU_TRANSLATE_ID = 3;
     final int MENU_ROTATE_ID = 4;
     final int MENU_COMBO_ID = 5;
-
+    MediaPlayer mp;
     ImageView imageView;
 
     /** Called when the activity is first created. */
@@ -30,6 +31,8 @@ public class AnimActivity extends AppCompatActivity {
         imageView = (ImageView) findViewById(R.id.imageView);
         // регистрируем контекстное меню для компонента tv
         registerForContextMenu(imageView);
+
+        mp = MediaPlayer.create(AnimActivity.this, R.raw.sound);
     }
 
     @Override
@@ -57,6 +60,7 @@ public class AnimActivity extends AppCompatActivity {
             case MENU_ALPHA_ID:
                 // создаем объект анимации из файла anim/myalpha
                 anim = AnimationUtils.loadAnimation(this, R.anim.myalpha);
+                mp.start();
                 break;
             case MENU_SCALE_ID:
                 anim = AnimationUtils.loadAnimation(this, R.anim.myscale);
