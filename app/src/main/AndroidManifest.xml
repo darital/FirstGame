@@ -9,10 +9,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-      
-        <activity android:name=".MenuActivity"></activity>
+        <activity android:name=".SplashActivity"></activity>
+        <activity android:name=".MenuActivity" />
         <activity android:name=".QuestionGame" />
-      
         <activity
             android:name=".SettingsActivity"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
@@ -20,7 +19,7 @@
             android:name=".NewGame"
             android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".SplashActivity">
+        <activity android:name=".web.UriActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
