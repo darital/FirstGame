@@ -14,7 +14,7 @@
         <activity android:name=".AddExpense" />
         <activity android:name=".AboutActivity" />
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
+        <activity android:name=".MainActivity" />
     </application>
 
 </manifest>
