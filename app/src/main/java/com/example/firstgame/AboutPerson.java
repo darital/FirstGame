@@ -20,12 +20,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class AboutPerson extends AppCompatActivity implements View.OnClickListener {
-    EditText etName, etSurname, etPhone;
+    EditText etName, etSurname, etPhone, etAge;
     Button btnAdd, btnRead, btnClear;
     public DBHelper dbHelper;
     String LOG_TAG = "my_log";
     String[] names = new String[200];
     String[] surnames = new String[200];
+    int[] ages = new int[200];
     String[] phones = new String[200];
 
     int cnt = 0;
@@ -54,6 +55,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         etName = (EditText) findViewById(R.id.etName);
         etSurname = (EditText) findViewById(R.id.etSurname);
         etPhone = (EditText) findViewById(R.id.etPhone);
+        etAge = (EditText) findViewById(R.id.etAge);
 
         btnAdd = (Button) findViewById(R.id.btnAdd);
         btnRead = (Button) findViewById(R.id.btnRead);
@@ -72,6 +74,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
         String name = etName.getText().toString();
         String surname = etSurname.getText().toString();
         String phone = etPhone.getText().toString();
+        int age = Integer.parseInt(etAge.getText().toString());
 
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -83,6 +86,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
 
                 cv.put("name", name);
                 cv.put("surname", surname);
+                cv.put("age", age);
                 cv.put("phone", phone);
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("mytable", null, cv);
@@ -90,12 +94,16 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                 etName.setText("");
                 etSurname.setText("");
                 etPhone.setText("");
+                etAge.setText("");
                 break;
             case R.id.btnRead:
                 // TODO elementlar qayta qo'shilmasin
                 Log.d(LOG_TAG, "--- Rows in mytable: ---");
+                String selection = "age > ?";
+                String sAge = etAge.getText().toString();
+                String[] selectionArgs = new String[]{sAge};
                 // делаем запрос всех данных из таблицы mytable, получаем Cursor
-                Cursor c = db.query("mytable", null, null, null, null, null, null);
+                Cursor c = db.query("mytable", null, selection, selectionArgs, null, null, null);
 
                 // ставим позицию курсора на первую строку выборки
                 // если в выборке нет строк, вернется false
@@ -105,6 +113,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                     int idColIndex = c.getColumnIndex("id");
                     int nameColIndex = c.getColumnIndex("name");
                     int surnameColIndex = c.getColumnIndex("surname");
+                    int ageColIndex = c.getColumnIndex("age");
                     int phoneColIndex = c.getColumnIndex("phone");
 
                     do {
@@ -112,12 +121,14 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                         String msg = "ID = " + c.getInt(idColIndex) +
                                 ", name = " + c.getString(nameColIndex) +
                                 ", surname = " + c.getString(surnameColIndex) +
+                                ", age = " + c.getInt(ageColIndex) +
                                 ", phone = " + c.getString(phoneColIndex);
                         Log.d(LOG_TAG, msg);
 //                        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
                         // переход на следующую строку
                         names[cnt] =  c.getString(nameColIndex);
                         surnames[cnt] = c.getString(surnameColIndex);
+                        ages[cnt] = c.getInt(ageColIndex);
                         phones[cnt] = c.getString(phoneColIndex);
                         cnt++;
                         // а если следующей нет (текущая - последняя), то false - выходим из цикла
@@ -140,6 +151,8 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
                     tvSurname.setText("Familiya: " + surnames[i]);
                     TextView tvPhone = (TextView) item.findViewById(R.id.tvPhone);
                     tvPhone.setText("Telefon: " + (phones[i]));
+                    TextView tvAge = (TextView) item.findViewById(R.id.tvAge);
+                    tvAge.setText("Yoshi: " + (ages[i]));
                     item.setBackgroundColor(colors[i % 2]);
                     linLayout.addView(item);
                 }

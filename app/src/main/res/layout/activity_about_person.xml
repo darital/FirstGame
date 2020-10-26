@@ -29,6 +29,14 @@
             android:inputType="textPersonName" />
 
         <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="type your age"
+            android:inputType="number" />
+
+        <EditText
             android:id="@+id/etPhone"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

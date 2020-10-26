@@ -20,6 +20,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "name text,"
                 + "surname text,"
+                + "age integer,"
                 + "phone text" + ");");
     }
     //  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);
