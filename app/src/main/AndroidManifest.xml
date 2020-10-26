@@ -9,7 +9,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".PieChartActivity"></activity>
+        <activity android:name=".BarChartActivity" />
+        <activity android:name=".ChartsActivity" />
+        <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".AddExpense" />
         <activity android:name=".AboutActivity" />
