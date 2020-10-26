@@ -1,72 +1,63 @@
 package com.example.firstgame;
 
-import androidx.annotation.RequiresApi;
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.os.Build;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.view.Menu;
 
-import java.util.Random;
-import java.util.concurrent.ThreadLocalRandom;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.snackbar.Snackbar;
+import com.google.android.material.navigation.NavigationView;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-TextView tvResult;
-EditText etAnswer;
-ImageView image;
-Button btnOk;
-int myAnswer;
-int randomNumber;
-Random random;
-int cnt = 5;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+public class MainActivity extends AppCompatActivity {
+
+    private AppBarConfiguration mAppBarConfiguration;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        tvResult = (TextView) findViewById(R.id.tvResult);
-        etAnswer = (EditText) findViewById(R.id.etAnswer);
-        image = (ImageView) findViewById(R.id.imageView);
-        btnOk = (Button) findViewById(R.id.btnOk);
-
-        btnOk.setOnClickListener(this);
-        random = new Random();
-        randomNumber = random.nextInt(100);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        mAppBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.nav_home, R.id.nav_gallery, R.id.nav_slideshow)
+                .setDrawerLayout(drawer)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, mAppBarConfiguration);
+        NavigationUI.setupWithNavController(navigationView, navController);
     }
 
     @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnOk:
-                if(TextUtils.isEmpty(etAnswer.getText())){
-                    Toast.makeText(this, "Sonni kiritmadingiz", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                cnt--;
-                if(cnt < 0){
-                    etAnswer.setText("");
-                    tvResult.setText("Siz yutqazdingiz");
-                    btnOk.setText("Qayta o'ynash");
-                    break;
-                }
-                myAnswer = Integer.parseInt(etAnswer.getText().toString());
-                etAnswer.setText("");
-                if(myAnswer > randomNumber)
-                    tvResult.setText("Men o'ylagan son kichikroq");
-                if(myAnswer < randomNumber)
-                    tvResult.setText("Men o'ylagan son kattaroq");
-                if(myAnswer == randomNumber){
-                    image.setImageResource(R.drawable.success);
-                    tvResult.setText("TABRIKLAYMAN");
-                    btnOk.setText("Qayta o'ynash");
-                }
-                break;
-        }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        return NavigationUI.navigateUp(navController, mAppBarConfiguration)
+                || super.onSupportNavigateUp();
     }
 }
