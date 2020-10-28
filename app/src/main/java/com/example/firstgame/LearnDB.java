@@ -3,11 +3,8 @@ package com.example.firstgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
-import android.content.Context;
-import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
@@ -17,9 +14,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class AboutPerson extends AppCompatActivity implements View.OnClickListener {
+public class LearnDB extends AppCompatActivity implements View.OnClickListener {
     EditText etName, etSurname, etPhone, etAge;
     Button btnAdd, btnRead, btnClear;
     public DBHelper dbHelper;
@@ -37,7 +33,7 @@ public class AboutPerson extends AppCompatActivity implements View.OnClickListen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_about_person);
+        setContentView(R.layout.activity_practice);
         findId();
 
         // создаем объект для создания и управления версиями БД
