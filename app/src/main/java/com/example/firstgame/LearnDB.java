@@ -2,6 +2,7 @@ package com.example.firstgame;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
@@ -171,22 +172,25 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
         dbHelper.close();
     }
 
+    @SuppressLint("DefaultLocale")
     public void createItem(int id, String name, String surname, int age, String phone){
+        Log.d(LOG_TAG, String.format("id: %d,\nname: %s,\nsurname: %s,\nage: %d,\nphone: %s", id, name, surname, age, phone));
+
         int[] colors = new int[2];
         colors[0] = Color.parseColor("#559966CC");
         colors[1] = Color.parseColor("#55336699");
            Log.d("myLogs", "i = ");
             View item = ltInflater.inflate(R.layout.item, linLayout, false);
             TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
-            tvNumber.setText(""+id);
+            tvNumber.setText(String.format("%d",id));
             TextView tvName = (TextView) item.findViewById(R.id.tvName);
-            tvName.setText("Ism: " + names);
+            tvName.setText(String.format("Ism: %s", name));
             TextView tvSurname = (TextView) item.findViewById(R.id.tvSurname);
-            tvSurname.setText("Familiya: " + surnames);
+            tvSurname.setText(String.format("Familiya: %s", surname));
             TextView tvPhone = (TextView) item.findViewById(R.id.tvPhone);
-            tvPhone.setText("Telefon: " + (phones));
+            tvPhone.setText(String.format("Telefon: %s", phone));
             TextView tvAge = (TextView) item.findViewById(R.id.tvAge);
-            tvAge.setText("Yoshi: " + (ages));
+            tvAge.setText(String.format("Yoshi: %s", age));
 //            item.setBackgroundColor(colors[i % 2]);
             linLayout.addView(item);
 
