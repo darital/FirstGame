@@ -3,10 +3,12 @@ package com.example.firstgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,10 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import java.text.Format;
+import java.util.Optional;
 
 public class LearnDB extends AppCompatActivity implements View.OnClickListener {
     EditText etName, etSurname, etPhone, etAge;
@@ -70,7 +76,6 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
         String name = etName.getText().toString();
         String surname = etSurname.getText().toString();
         String phone = etPhone.getText().toString();
-        int age = Integer.parseInt(etAge.getText().toString());
 
         // подключаемся к БД
         SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -79,6 +84,11 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
             case R.id.btnAdd:
                 Log.d(LOG_TAG, "--- Insert in mytable: ---");
                 // подготовим данные для вставки в виде пар: наименование столбца - значение
+                if(TextUtils.isEmpty(etAge.getText())){
+                    Toast.makeText(this, "Yoshni yoz", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+                int age = Integer.parseInt(etAge.getText().toString());
 
                 cv.put("name", name);
                 cv.put("surname", surname);
@@ -91,15 +101,20 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
                 etSurname.setText("");
                 etPhone.setText("");
                 etAge.setText("");
+
+                Log.d(LOG_TAG, String.format("id: %d,\nname: %s,\nsurname: %s,\nage: %d,\nphone: %s", cnt, name, surname, age, phone));
+                createItem(cnt, name, surname, age, phone);
+                cnt++;
                 break;
             case R.id.btnRead:
+                linLayout.removeAllViews();
                 // TODO elementlar qayta qo'shilmasin
                 Log.d(LOG_TAG, "--- Rows in mytable: ---");
                 String selection = "age > ?";
                 String sAge = etAge.getText().toString();
                 String[] selectionArgs = new String[]{sAge};
                 // делаем запрос всех данных из таблицы mytable, получаем Cursor
-                Cursor c = db.query("mytable", null, selection, selectionArgs, null, null, null);
+                Cursor c = db.query("mytable", null, null, null, null, null, null);
 
                 // ставим позицию курсора на первую строку выборки
                 // если в выборке нет строк, вернется false
@@ -132,39 +147,49 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
                 } else
                     Log.d(LOG_TAG, "0 rows");
                 c.close();
-                int[] colors = new int[2];
-                 colors[0] = Color.parseColor("#559966CC");
-                 colors[1] = Color.parseColor("#55336699");
 
                 for (int i = 0; i < cnt; i++) {
                     Log.d("myLogs", "i = " + i);
-                    View item = ltInflater.inflate(R.layout.item, linLayout, false);
-                    TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
-                    tvNumber.setText(""+(i+1));
-                    TextView tvName = (TextView) item.findViewById(R.id.tvName);
-                    tvName.setText("Ism: " + names[i]);
-                    TextView tvSurname = (TextView) item.findViewById(R.id.tvSurname);
-                    tvSurname.setText("Familiya: " + surnames[i]);
-                    TextView tvPhone = (TextView) item.findViewById(R.id.tvPhone);
-                    tvPhone.setText("Telefon: " + (phones[i]));
-                    TextView tvAge = (TextView) item.findViewById(R.id.tvAge);
-                    tvAge.setText("Yoshi: " + (ages[i]));
-                    item.setBackgroundColor(colors[i % 2]);
-                    linLayout.addView(item);
-                }
 
+                    createItem(i, names[i], surnames[i], ages[i], phones[i]);
+                }
+                cnt = 0;
                 break;
 
             case R.id.btnClear:
-                Log.d(LOG_TAG, "--- Clear mytable: ---");
+                Intent intent = new Intent(LearnDB.this, SortedElements.class);
+                startActivity(intent);
+
+               /* Log.d(LOG_TAG, "--- Clear mytable: ---");
                 // удаляем все записи
                 int clearCount = db.delete("mytable", null, null);
                 Log.d(LOG_TAG, "deleted rows count = " + clearCount);
-                break;
+                break;*/
             // закрываем подключение к БД
 
         }
         dbHelper.close();
+    }
+
+    public void createItem(int id, String name, String surname, int age, String phone){
+        int[] colors = new int[2];
+        colors[0] = Color.parseColor("#559966CC");
+        colors[1] = Color.parseColor("#55336699");
+           Log.d("myLogs", "i = ");
+            View item = ltInflater.inflate(R.layout.item, linLayout, false);
+            TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
+            tvNumber.setText(""+id);
+            TextView tvName = (TextView) item.findViewById(R.id.tvName);
+            tvName.setText("Ism: " + names);
+            TextView tvSurname = (TextView) item.findViewById(R.id.tvSurname);
+            tvSurname.setText("Familiya: " + surnames);
+            TextView tvPhone = (TextView) item.findViewById(R.id.tvPhone);
+            tvPhone.setText("Telefon: " + (phones));
+            TextView tvAge = (TextView) item.findViewById(R.id.tvAge);
+            tvAge.setText("Yoshi: " + (ages));
+//            item.setBackgroundColor(colors[i % 2]);
+            linLayout.addView(item);
+
     }
 
 }

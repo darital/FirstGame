@@ -8,19 +8,19 @@
     tools:context=".SortedElements">
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btnYoung"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="0-17" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btnMiddle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="18-25" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btnOld"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="26-40" />
