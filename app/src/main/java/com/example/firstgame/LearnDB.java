@@ -83,6 +83,7 @@ public class LearnDB extends AppCompatActivity implements View.OnClickListener {
 
         switch (view.getId()) {
             case R.id.btnAdd:
+                //TODO read qilingandan keyin ohirda qo'shilganda 0nchi id bilan qo'shiladi
                 Log.d(LOG_TAG, "--- Insert in mytable: ---");
                 // подготовим данные для вставки в виде пар: наименование столбца - значение
                 if(TextUtils.isEmpty(etAge.getText())){
