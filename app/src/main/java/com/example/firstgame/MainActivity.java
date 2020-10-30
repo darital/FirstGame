@@ -12,6 +12,7 @@ import android.provider.ContactsContract;
 import android.speech.tts.TextToSpeech;
 import android.telephony.SmsMessage;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -114,7 +115,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnSpeech = (Button) findViewById(R.id.btnSpeech);
         btnSpeech.setOnClickListener(this);
 
-/*        toggleListener = new OnCheckedChangeListener() {
+        toggleListener = new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 if(isChecked){
@@ -126,11 +127,10 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
         };
-        toggle.setOnCheckedChangeListener(toggleListener);*/
-/*
+        toggle.setOnCheckedChangeListener(toggleListener);
         checkTTS();
         initializeSMSReceiver();
-        registerSMSReceiver();*/
+        registerSMSReceiver();
     }
     @Override
     protected void onDestroy() {
@@ -147,8 +147,9 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     Toast.makeText(this, "Enter text", Toast.LENGTH_SHORT).show();
                     break;
                 }
-                String text = etText.getText().toString();
-                speaker.speak(text);
+                String my_text = etText.getText().toString();
+//                Log.d("speeeeech", text);
+                speaker.speak(my_text);
                 break;
         }
 

@@ -3,6 +3,7 @@ package com.example.firstgame;
 import android.content.Context;
 import android.media.AudioManager;
 import android.speech.tts.TextToSpeech;
+import android.util.Log;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -34,6 +35,7 @@ public class Speaker implements TextToSpeech.OnInitListener {
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             Locale locale = new Locale("tr", "TR");
+//            Locale locale = new Locale("en", "US");
             int result = tts.setLanguage(locale);
             ready = true;
             if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED)
@@ -46,7 +48,6 @@ public class Speaker implements TextToSpeech.OnInitListener {
     }
 
     public void speak(String text){
-
         //Речь начнется, только если TTS уже готова к использованию
         //и пользователь позволил ей работать:
         if(ready && allowed) {
