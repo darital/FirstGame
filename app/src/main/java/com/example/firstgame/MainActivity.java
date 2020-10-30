@@ -1,157 +1,135 @@
 package com.example.firstgame;
 
 import android.app.Activity;
-import android.content.BroadcastReceiver;
-import android.content.Context;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.database.Cursor;
-import android.net.Uri;
+import android.app.ProgressDialog;
+import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.ContactsContract;
-import android.speech.tts.TextToSpeech;
-import android.telephony.SmsMessage;
-import android.text.TextUtils;
 import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.CompoundButton;
-import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ListAdapter;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
 import android.widget.Toast;
-import android.widget.ToggleButton;
-import android.widget.CompoundButton.OnCheckedChangeListener;
-/**
- * Created by Admiral on 26.02.2017.
- */
 
-public class MainActivity extends Activity implements View.OnClickListener {
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
-    private final int CHECK_CODE = 0x1;
-    private final int LONG_DURATION = 5000;
-    private final int SHORT_DURATION = 1200;
+import java.util.ArrayList;
+import java.util.HashMap;
 
-    private Speaker speaker;
+public class MainActivity extends Activity {
+    private String TAG = MainActivity.class.getSimpleName();
+    private ProgressDialog pdialog;
+    private ListView listView;
 
-    private ToggleButton toggle;
-    private OnCheckedChangeListener toggleListener;
+    // URL of the JSON
+    private static String url = "https://api.androidhive.info/contacts/";
 
-    private TextView smsText;
-    private TextView smsSender;
-    private BroadcastReceiver smsReceiver;
-    EditText etText;
-    Button btnSpeech;
-
-    private void checkTTS() {
-        Intent check = new Intent();
-        check.setAction(TextToSpeech.Engine.ACTION_CHECK_TTS_DATA);
-        startActivityForResult(check, CHECK_CODE);
-    }
-
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (requestCode == CHECK_CODE) {
-            if (resultCode == TextToSpeech.Engine.CHECK_VOICE_DATA_PASS) {
-                speaker = new Speaker(this);
-            } else {
-                Intent install = new Intent();
-                install.setAction(TextToSpeech.Engine.ACTION_INSTALL_TTS_DATA);
-                startActivity(install);
-            }
-        }
-    }
-    private void initializeSMSReceiver(){
-        smsReceiver = new BroadcastReceiver(){
-            @Override
-            public void onReceive(Context context, Intent intent) {
-
-                Bundle bundle = intent.getExtras();
-                if(bundle!=null){
-                    Object[] pdus = (Object[])bundle.get("pdus");
-                    for(int i=0;i<pdus.length;i++){
-                        byte[] pdu = (byte[])pdus[i];
-                        SmsMessage message = SmsMessage.createFromPdu(pdu);
-                        String text = message.getDisplayMessageBody();
-                        String sender = getContactName(message.getOriginatingAddress());
-                        speaker.pause(LONG_DURATION);
-                        speaker.speak("Sizga"+ sender+"hat keldi");
-                        speaker.pause(SHORT_DURATION);
-                        speaker.speak(text);
-                        smsSender.setText("Sizga " + sender + " hat keldi ");
-                        smsText.setText(text);
-                    }
-                }
-
-            }
-        };
-    }
-
-    private String getContactName(String phone){
-        Uri uri = Uri.withAppendedPath(ContactsContract.PhoneLookup.CONTENT_FILTER_URI, Uri.encode(phone));
-        String projection[] = new String[]{ContactsContract.Data.DISPLAY_NAME};
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if(cursor.moveToFirst()){
-            return cursor.getString(0);
-        }else {
-            return "Неизвестный номер";
-        }
-    }
-
-    private void registerSMSReceiver() {
-        IntentFilter intentFilter = new IntentFilter("android.provider.Telephony.SMS_RECEIVED");
-        registerReceiver(smsReceiver, intentFilter);
-    }
+    ArrayList<HashMap<String, String>> contactlist;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        toggle = (ToggleButton)findViewById(R.id.speechToggle);
-        smsText = (TextView)findViewById(R.id.sms_text);
-        smsSender = (TextView)findViewById(R.id.sms_sender);
-        etText = (EditText) findViewById(R.id.etText);
-        btnSpeech = (Button) findViewById(R.id.btnSpeech);
-        btnSpeech.setOnClickListener(this);
-
-        toggleListener = new OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton view, boolean isChecked) {
-                if(isChecked){
-                    speaker.allow(true);
-                 //   speaker.speak(getString(R.string.start_speaking));
-                }else{
-                    speaker.speak(getString(R.string.stop_speaking));
-                    speaker.allow(false);
-                }
-            }
-        };
-        toggle.setOnCheckedChangeListener(toggleListener);
-        checkTTS();
-        initializeSMSReceiver();
-        registerSMSReceiver();
-    }
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        unregisterReceiver(smsReceiver);
-        speaker.destroy();
+        contactlist = new ArrayList<>();
+        listView = (ListView) findViewById(R.id.listview);
+        new GetContacts().execute();
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()){
-            case R.id.btnSpeech:
-                if(TextUtils.isEmpty(etText.getText().toString())){
-                    Toast.makeText(this, "Enter text", Toast.LENGTH_SHORT).show();
-                    break;
-                }
-                String my_text = etText.getText().toString();
-//                Log.d("speeeeech", text);
-                speaker.speak(my_text);
-                break;
+    private class GetContacts extends AsyncTask<Void, Void, Void> {
+
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            // show loading dialog
+            pdialog = new ProgressDialog(MainActivity.this);
+            pdialog.setTitle("loading...");
+            pdialog.setCancelable(false);
+            pdialog.show();
         }
 
+        @Override
+        protected Void doInBackground(Void... voids) {
+            HttpHandler sh = new HttpHandler();
+            String jsonString = sh.makeServiceCall(url);
+            Log.e(TAG, "tekshiramiz 1");
+            Log.e(TAG, "Response from url: " + jsonString);
+            if (jsonString != null) {
+                Log.e(TAG, "tekshiramiz 2");
+                try {
+                    JSONObject jsonObject = new JSONObject(jsonString);
+                    // getting json array
+                    JSONArray contacts = jsonObject.getJSONArray("contacts");
+
+                    //looping through all contacts
+                    for (int i = 0; i < contacts.length(); i++) {
+                        JSONObject c = contacts.getJSONObject(i);
+
+                        String id = c.getString("id");
+                        String name = c.getString("name");
+                        String email = c.getString("email");
+                        String address = c.getString("address");
+                        String gender = c.getString("gender");
+
+                        // Phone node is JSON Object
+                        JSONObject phone = c.getJSONObject("phone");
+
+                        String mobile = phone.getString("mobile");
+                        String home = phone.getString("home");
+                        String office = phone.getString("office");
+
+                        HashMap<String, String> contact = new HashMap<>();
+                        contact.put("id", id);
+                        contact.put("name", name);
+                        contact.put("email", email);
+                        contact.put("mobile", mobile);
+                        contactlist.add(contact);
+
+
+                    }
+                } catch (final JSONException e) {
+                    Log.e(TAG, "tekshiramiz 3");
+                    Log.e(TAG, "Response from url error: " + e.getMessage());
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(MainActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+            } else {
+                Log.e(TAG, "Couldn't get json from server");
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(MainActivity.this, "Error in json getting from server", Toast.LENGTH_SHORT).show();
+                    }
+                });
+
+
+            }
+
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void aVoid) {
+            super.onPostExecute(aVoid);
+            if (pdialog.isShowing()) {
+                pdialog.dismiss();
+
+            }
+
+            // updating json data to listview
+            ListAdapter adapter = new SimpleAdapter(MainActivity.this, contactlist, R.layout.list_item, new String[]{"name", "email", "mobile"},
+                    new int[]{R.id.name, R.id.email, R.id.mobile});
+            listView.setAdapter(adapter);
+
+
+        }
     }
+
+
 }
