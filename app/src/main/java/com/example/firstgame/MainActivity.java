@@ -114,7 +114,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         btnSpeech = (Button) findViewById(R.id.btnSpeech);
         btnSpeech.setOnClickListener(this);
 
-        toggleListener = new OnCheckedChangeListener() {
+/*        toggleListener = new OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton view, boolean isChecked) {
                 if(isChecked){
@@ -126,11 +126,11 @@ public class MainActivity extends Activity implements View.OnClickListener {
                 }
             }
         };
-        toggle.setOnCheckedChangeListener(toggleListener);
-
+        toggle.setOnCheckedChangeListener(toggleListener);*/
+/*
         checkTTS();
         initializeSMSReceiver();
-        registerSMSReceiver();
+        registerSMSReceiver();*/
     }
     @Override
     protected void onDestroy() {
