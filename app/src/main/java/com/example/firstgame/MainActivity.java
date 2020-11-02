@@ -23,7 +23,7 @@ public class MainActivity extends Activity {
     private ListView listView;
 
     // URL of the JSON
-    private static String url = "http://api.plos.org/search?q=title:DNA";
+    private static String url = "http://api.plos.org/search?q=title:\"Drosophila\"";
 
     ArrayList<HashMap<String, String>> contactlist;
 
