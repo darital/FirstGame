@@ -78,7 +78,7 @@ public class BarChartActivity extends AppCompatActivity {
 
         ArrayList types = new ArrayList();
         for(int i = 0; i<cnt; i++){
-            types.add(expense_types[i]);
+        types.add(expense_types[i]);
         }
 //        types.add("Kiyim-kechak");
 //        types.add("Oziq-ovqat");
