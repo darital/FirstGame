@@ -11,13 +11,14 @@
         android:theme="@style/AppTheme">
 <!--        <activity android:name=".PieChartActivity"></activity>-->
         <activity android:name=".BarChartActivity" />
-        <activity android:name=".ChartsActivity" />
+        <activity android:name=".AddExpense" />
+        <activity android:name=".AboutPerson" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
-        <activity android:name=".AddExpense" />
+<!--        <activity android:name=".AddExpense" />-->
         <activity android:name=".AboutActivity" />
         <activity
-            android:name=".SplashActivity"
+            android:name=".ChartsActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>

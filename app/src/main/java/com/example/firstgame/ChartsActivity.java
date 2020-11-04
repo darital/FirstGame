@@ -9,8 +9,8 @@ import android.widget.Button;
 
 import com.github.mikephil.charting.charts.BarChart;
 
-public class ChartsActivity extends AppCompatActivity {
-    Button btnBarChart, btnPieChart;
+public class ChartsActivity extends AppCompatActivity implements View.OnClickListener {
+    Button btnBarChart, btnPieChart, btnAddExpense;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +30,22 @@ public class ChartsActivity extends AppCompatActivity {
         btnPieChart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent I = new Intent(ChartsActivity.this, PieChartActivity.class);
-                startActivity(I);
+                Intent sdf = new Intent(ChartsActivity.this, AboutPerson.class);
+                startActivity(sdf);
             }
         });
+        btnAddExpense = (Button) findViewById(R.id.btnExpense);
+        btnAddExpense.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.btnExpense:
+                Intent intent = new Intent(ChartsActivity.this, AddExpense.class);
+                startActivity(intent);
+                break;
+        }
 
     }
 }

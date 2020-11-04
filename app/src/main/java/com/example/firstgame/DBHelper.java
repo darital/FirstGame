@@ -9,7 +9,7 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public DBHelper(Context context) {
         // конструктор суперкласса
-        super(context, "personDB", null, 1);
+        super(context, "expenseDB", null, 1);
     }
 
     @Override
@@ -18,10 +18,8 @@ public class DBHelper extends SQLiteOpenHelper {
         // создаем таблицу с полями
         db.execSQL("create table mytable ("
                 + "id integer primary key autoincrement,"
-                + "name text,"
-                + "surname text,"
-                + "age integer,"
-                + "phone text" + ");");
+                + "type_expense text,"
+                + "sum_of_expense integer" + ");");
     }
     //  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);
     @Override
