@@ -80,6 +80,7 @@ public class BarChartActivity extends AppCompatActivity {
         for(int i = 0; i<cnt; i++){
         types.add(expense_types[i]);
         }
+        Log.d(LOG_TAG, "onCreate: ");
 //        types.add("Kiyim-kechak");
 //        types.add("Oziq-ovqat");
 //        types.add("Restoran");
