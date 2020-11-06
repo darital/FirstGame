@@ -19,7 +19,8 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="QOTIRIB SOLOSON,SHILPOIYTIRIB OLOSON"
-            android:textSize="36sp" />
+            android:textSize="36sp"
+            android:textAllCaps="true"/>
 
         <EditText
             android:id="@+id/edt"
