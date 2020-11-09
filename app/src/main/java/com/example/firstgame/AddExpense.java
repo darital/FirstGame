@@ -6,6 +6,7 @@ import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
@@ -14,6 +15,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class AddExpense extends AppCompatActivity implements View.OnClickListener {
 EditText etSum;
@@ -36,7 +38,7 @@ public DBHelper dbHelper;
         Intent intent = getIntent();
         expense_type = intent.getStringExtra("expense_type");
 
-        tvType.setText("Type of expense: " + expense_type);
+        tvType.setText("Novig'o pul yo'q yo'qatajaksan: " + expense_type);
 
 
 
@@ -48,6 +50,11 @@ public DBHelper dbHelper;
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btnAdd:
+                if(TextUtils.isEmpty(etSum.getText().toString())){
+                    Toast.makeText(this, "Uka pul nichcha so'mliqini yoz", Toast.LENGTH_SHORT).show();
+                    break;
+                }
+
                 int summ = Integer.parseInt(etSum.getText().toString());
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();

@@ -5,12 +5,14 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -37,6 +39,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
+
         setSupportActionBar(toolbar);
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         ltInflater = getLayoutInflater();
         getExpenseElements();
-        tvTotal.setText("Total sum of expenses: " + total_sum);
+        tvTotal.setText("Buyun nichcha so'm ishlatganing: " + total_sum);
     }
 
     public void getExpenseElements(){
@@ -87,9 +90,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                     TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
                     tvNumber.setText("" + cnt);
                     TextView tvSurname = (TextView) item.findViewById(R.id.tvType);
-                    tvSurname.setText("Type: " + expense_type);
+                    tvSurname.setText("Novig'o pul yo'q yo'qatganing: " + expense_type);
                     TextView tvPhone = (TextView) item.findViewById(R.id.tvSum);
-                    tvPhone.setText("Sum: " + sum_of_expenses);
+                    tvPhone.setText("Puli: " + sum_of_expenses);
                     item.setBackgroundColor(colors[cnt % 2]);
                     linLayout.addView(item);
 
@@ -121,7 +124,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         cnt= 0;
         getExpenseElements();
         super.onResume();
-        tvTotal.setText("Total sum of expenses: " + total_sum);
+        tvTotal.setText("Buyun nichcha so'm ishlatganing: " + total_sum);
     }
 
     @Override

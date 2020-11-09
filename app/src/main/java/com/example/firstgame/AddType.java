@@ -35,7 +35,7 @@ public class AddType extends AppCompatActivity implements View.OnClickListener {
         switch (view.getId()){
             case R.id.btnAdd:
                 if(TextUtils.isEmpty(etType.getText().toString())){
-                    Toast.makeText(this, "Please enter type", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Uka novig'o pul yo'qatajaksan shuni yoz", Toast.LENGTH_SHORT).show();
                     break;
                 }
                 ContentValues cv = new ContentValues();
