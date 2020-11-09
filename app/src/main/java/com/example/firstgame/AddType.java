@@ -16,9 +16,7 @@ import android.widget.Toast;
 public class AddType extends AppCompatActivity implements View.OnClickListener {
     EditText etType;
     Button btnAdd, btnCancel;
-    String type_expense;
     public DBHelper dbHelper;
-    Boolean addNewType = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,7 +42,11 @@ public class AddType extends AppCompatActivity implements View.OnClickListener {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 String type = etType.getText().toString();
                 cv.put("type_expense", type);
-                long rowID = db.insert("expenseTypes", null, cv);
+                cv.put("sum_of_expense", 0);
+                long rowID = db.insert("expenseSum", null, cv);
+                finish();
+                break;
+            case R.id.btnCancel:
                 finish();
                 break;
 

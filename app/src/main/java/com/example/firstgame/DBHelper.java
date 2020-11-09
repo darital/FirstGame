@@ -20,9 +20,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 + "id integer primary key autoincrement,"
                 + "type_expense text,"
                 + "sum_of_expense integer" + ");");
-        db.execSQL("create table expenseTypes ("
-                + "id integer primary key autoincrement,"
-                + "type_expense text" + ");");
     }
 
     //  create table mytable (id integer primary key autoincrement, name text, surname text, phone text);

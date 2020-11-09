@@ -18,7 +18,8 @@ import android.widget.TextView;
 public class AddExpense extends AppCompatActivity implements View.OnClickListener {
 EditText etSum;
 Button btnAdd, btnCancel;
-String type_expense;
+String expense_type;
+TextView tvType;
 public DBHelper dbHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,38 +28,16 @@ public DBHelper dbHelper;
 
         etSum = (EditText) findViewById(R.id.etSum);
         btnAdd = (Button) findViewById(R.id.btnAdd);
+        tvType = (TextView) findViewById(R.id.tvType);
         btnCancel = (Button) findViewById(R.id.btnCancel);
         btnAdd.setOnClickListener(this);
         btnCancel.setOnClickListener(this);
 
-        Spinner staticSpinner = (Spinner) findViewById(R.id.expense_spinner);
+        Intent intent = getIntent();
+        expense_type = intent.getStringExtra("expense_type");
 
-        // Create an ArrayAdapter using the string array and a default spinner
-        ArrayAdapter<CharSequence> staticAdapter = ArrayAdapter
-                .createFromResource(this, R.array.brew_array,
-                        android.R.layout.simple_spinner_item);
+        tvType.setText("Type of expense: " + expense_type);
 
-        // Specify the layout to use when the list of choices appears
-        staticAdapter
-                .setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-
-        // Apply the adapter to the spinner
-        staticSpinner.setAdapter(staticAdapter);
-
-
-        staticSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view,
-                                       int position, long id) {
-                Log.v("My_tag", (String) parent.getItemAtPosition(position));
-                type_expense = (String) parent.getItemAtPosition(position);
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-                // TODO Auto-generated method stub
-            }
-        });
 
 
 
@@ -73,10 +52,13 @@ public DBHelper dbHelper;
                 ContentValues cv = new ContentValues();
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
 
-                cv.put("type_expense", type_expense);
+                cv.put("type_expense", expense_type);
                 cv.put("sum_of_expense", summ);
                 // вставляем запись и получаем ее ID
                 long rowID = db.insert("expenseSum", null, cv);
+                finish();
+                break;
+            case R.id.btnCancel:
                 finish();
                 break;
         }
