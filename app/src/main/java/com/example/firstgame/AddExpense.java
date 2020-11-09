@@ -3,6 +3,7 @@ package com.example.firstgame;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class AddExpense extends AppCompatActivity implements View.OnClickListener {
 EditText etSum;
@@ -74,7 +76,7 @@ public DBHelper dbHelper;
                 cv.put("type_expense", type_expense);
                 cv.put("sum_of_expense", summ);
                 // вставляем запись и получаем ее ID
-                long rowID = db.insert("mytable", null, cv);
+                long rowID = db.insert("expenseSum", null, cv);
                 finish();
                 break;
         }

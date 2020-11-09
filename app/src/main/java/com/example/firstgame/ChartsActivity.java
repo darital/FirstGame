@@ -28,13 +28,13 @@ public class ChartsActivity extends AppCompatActivity implements View.OnClickLis
                 startActivity(I);
             }
         });
-        btnPieChart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent sdf = new Intent(ChartsActivity.this, AboutPerson.class);
-                startActivity(sdf);
-            }
-        });
+//        btnPieChart.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent sdf = new Intent(ChartsActivity.this, AboutPerson.class);
+//                startActivity(sdf);
+//            }
+//        });
         btnAddExpense = (Button) findViewById(R.id.btnExpense);
         btnAddExpense.setOnClickListener(this);
 

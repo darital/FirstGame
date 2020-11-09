@@ -9,16 +9,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-<!--        <activity android:name=".PieChartActivity"></activity>-->
-        <activity android:name=".BarChartActivity" />
-        <activity android:name=".AddExpense" />
-        <activity android:name=".AboutPerson" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-<!--        <activity android:name=".AddExpense" />-->
-        <activity android:name=".AboutActivity" />
         <activity
-            android:name=".ChartsActivity"
+            android:name=".AddType"
+            android:theme="@style/Theme.AppCompat.Light.Dialog.Alert" />
+        <!-- <activity android:name=".PieChartActivity"></activity> -->
+        <activity android:name=".BarChartActivity" />
+        <activity android:name=".AddExpense"  android:theme="@style/Theme.AppCompat.Light.Dialog.Alert"/>
+        <activity
+            android:name=".MainActivity"
             android:label="@string/title_activity_main"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
