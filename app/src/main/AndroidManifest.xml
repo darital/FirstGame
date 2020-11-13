@@ -4,12 +4,10 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/ic_lesson"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <!-- <activity android:name=".PieChartActivity"></activity> -->
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
@@ -20,6 +18,24 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".AddLesson" />
+        <activity android:name=".OneActivity" />
+        <activity android:name=".TwoActivity" />
+        <activity android:name=".ThreeActivity" />
+        <activity android:name=".FourActivity" />
+        <activity android:name=".FiveActivity" />
+        <activity android:name=".SixActivity" />
+        <activity android:name=".EditLesson" />
+        <activity android:name=".Settings"
+            android:label="Sozlash menyusi"
+            android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name=".AddHomework"
+            android:label="@string/about_homework"
+            android:theme="@android:style/Theme.Dialog" >
+        </activity>
     </application>
+    <uses-permission android:name="android.permission.RECORD_AUDIO"></uses-permission>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"></uses-permission>
+
 
 </manifest>

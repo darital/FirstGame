@@ -96,7 +96,7 @@ Switch switchAll;
         // в нашем случае вместо картинки идет xml-файл,
         // который определяет картинку по состоянию вкладки
         tabSpec.setIndicator("Seshanba");
-//        tabSpec.setContent(new Intent(this, TwoActivity.class));
+        tabSpec.setContent(new Intent(this, TwoActivity.class));
       // tabSpec.setContent(R.id.seshanba);
         tabHost.addTab(tabSpec);
 
@@ -105,7 +105,7 @@ Switch switchAll;
         // название вкладки
         tabSpec.setIndicator("Chorshanba");
         // указываем id компонента из FrameLayout, он и станет содержимым
-//        tabSpec.setContent(new Intent(this, ThreeActivity.class));
+        tabSpec.setContent(new Intent(this, ThreeActivity.class));
         tabHost.addTab(tabSpec);
 
         // создаем вкладку и указываем тег
@@ -113,7 +113,7 @@ Switch switchAll;
         // название вкладки
         tabSpec.setIndicator("Payshanba");
         // указываем id компонента из FrameLayout, он и станет содержимым
-//        tabSpec.setContent(new Intent(this, FourActivity.class));
+        tabSpec.setContent(new Intent(this, FourActivity.class));
         tabHost.addTab(tabSpec);
 
         // создаем вкладку и указываем тег
@@ -121,7 +121,7 @@ Switch switchAll;
         // название вкладки
         tabSpec.setIndicator("Juma");
         // указываем id компонента из FrameLayout, он и станет содержимым
-//        tabSpec.setContent(new Intent(this, FiveActivity.class));
+        tabSpec.setContent(new Intent(this, FiveActivity.class));
         tabHost.addTab(tabSpec);
 
         // создаем вкладку и указываем тег
@@ -129,7 +129,7 @@ Switch switchAll;
         // название вкладки
         tabSpec.setIndicator("Shanba");
         // указываем id компонента из FrameLayout, он и станет содержимым
-//        tabSpec.setContent(new Intent(this, SixActivity.class));
+        tabSpec.setContent(new Intent(this, SixActivity.class));
         tabHost.addTab(tabSpec);
 
         // вторая вкладка будет выбрана по умолчанию
