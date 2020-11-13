@@ -1,111 +1,196 @@
 package com.example.firstgame;
 
+import android.app.TabActivity;
+import android.content.Context;
 import android.content.Intent;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Color;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+
 import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Switch;
+import android.widget.TabHost;
+
+import androidx.appcompat.app.ActionBarDrawerToggle;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.navigation.NavigationView;
 
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
+import java.util.Calendar;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    LinearLayout linLayout;
-    LayoutInflater ltInflater;
-    public DBHelper dbHelper;
-    String LOG_TAG = "MY_TAG";
-    int cnt = 0;
-    int total_sum = 0;
-    TextView tvTotal;
+public class MainActivity extends TabActivity
+        implements NavigationView.OnNavigationItemSelectedListener {
+    Calendar c = Calendar.getInstance();
+    int day = c.get(Calendar.DAY_OF_WEEK)-1;
+    final String LOG_TAG = "myLogs";
+
+   String tabID_position = "tag"+day;
+Button btnSettings;
+Switch switchAll;
+    boolean switch_used=false;
+    int juft_toq;
+    public static final String APP_PREFERENCES = "mysettings";
+    public static final String APP_PREFERENCES_WEEK = "juft_toq";
+    private SharedPreferences mSettings;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        FloatingActionButton fab = findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+
+        mSettings = getSharedPreferences(APP_PREFERENCES, Context.MODE_PRIVATE);
+    Button btnSettings = (Button) findViewById(R.id.btnSettings);
+        btnSettings.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MainActivity.this, AddType.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Settings.class);
                 startActivity(intent);
             }
         });
-        tvTotal = (TextView) findViewById(R.id.tvTotal);
+        Switch switchAll = (Switch) findViewById(R.id.switch_all);
+        switchAll.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (switch_used == false)
+                    switch_used = true;
+                else
+                    switch_used = false;
+                Log.d(LOG_TAG, "--- Switch used: ---"+switch_used);
 
-        linLayout = (LinearLayout) findViewById(R.id.linlayout);
+            }
+        });
 
-        ltInflater = getLayoutInflater();
-        getExpenseElements();
-        tvTotal.setText("Total sum of expenses: " + total_sum);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+   //     setSupportActionBar(toolbar);
+
+        TabHost tabHost = getTabHost();
+
+        //  TabHost tabHost = (TabHost) findViewById(android.R.id.tabhost);
+        // инициализация
+      //  tabHost.setup();
+
+        TabHost.TabSpec tabSpec;
+
+        // создаем вкладку и указываем тег
+        tabSpec = tabHost.newTabSpec("tag1");
+        // название вкладки
+        tabSpec.setIndicator("Dushanba");
+        // указываем id компонента из FrameLayout, он и станет содержимым
+        Intent intent = new Intent(MainActivity.this, OneActivity.class);
+        intent.putExtra("switch", switch_used);
+        tabSpec.setContent(intent);
+
+     //  tabSpec.setContent(R.id.dushanba);
+        // добавляем в корневой элемент
+        tabHost.addTab(tabSpec);
+
+        tabSpec = tabHost.newTabSpec("tag2");
+        // указываем название и картинку
+        // в нашем случае вместо картинки идет xml-файл,
+        // который определяет картинку по состоянию вкладки
+        tabSpec.setIndicator("Seshanba");
+//        tabSpec.setContent(new Intent(this, TwoActivity.class));
+      // tabSpec.setContent(R.id.seshanba);
+        tabHost.addTab(tabSpec);
+
+        // создаем вкладку и указываем тег
+        tabSpec = tabHost.newTabSpec("tag3");
+        // название вкладки
+        tabSpec.setIndicator("Chorshanba");
+        // указываем id компонента из FrameLayout, он и станет содержимым
+//        tabSpec.setContent(new Intent(this, ThreeActivity.class));
+        tabHost.addTab(tabSpec);
+
+        // создаем вкладку и указываем тег
+        tabSpec = tabHost.newTabSpec("tag4");
+        // название вкладки
+        tabSpec.setIndicator("Payshanba");
+        // указываем id компонента из FrameLayout, он и станет содержимым
+//        tabSpec.setContent(new Intent(this, FourActivity.class));
+        tabHost.addTab(tabSpec);
+
+        // создаем вкладку и указываем тег
+        tabSpec = tabHost.newTabSpec("tag5");
+        // название вкладки
+        tabSpec.setIndicator("Juma");
+        // указываем id компонента из FrameLayout, он и станет содержимым
+//        tabSpec.setContent(new Intent(this, FiveActivity.class));
+        tabHost.addTab(tabSpec);
+
+        // создаем вкладку и указываем тег
+        tabSpec = tabHost.newTabSpec("tag6");
+        // название вкладки
+        tabSpec.setIndicator("Shanba");
+        // указываем id компонента из FrameLayout, он и станет содержимым
+//        tabSpec.setContent(new Intent(this, SixActivity.class));
+        tabHost.addTab(tabSpec);
+
+        // вторая вкладка будет выбрана по умолчанию
+        tabHost.setCurrentTabByTag(tabID_position);
+
+        // обработчик переключения вкладок
+        tabHost.setOnTabChangedListener(new TabHost.OnTabChangeListener() {
+            public void onTabChanged(String tabId) {
+                tabID_position = tabId;
+                //      Toast.makeText(getBaseContext(), "tabId = " + tabID_position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+                Intent intent = new Intent(MainActivity.this, AddLesson.class);
+                intent.putExtra("TabID", tabID_position);
+                startActivity(intent);
+            }
+        });
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.setDrawerListener(toggle);
+        toggle.syncState();
+
+        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
     }
 
-    public void getExpenseElements(){
-        linLayout.removeAllViews();
-        dbHelper = new DBHelper(this);
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String[] columns = new String[] { "type_expense", "sum(sum_of_expense) as sum_of_expense" };
-        String groupBy = "type_expense";
-        final Cursor c = db.query("expenseSum", columns, null, null, groupBy, null, null);
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (mSettings.contains(APP_PREFERENCES_WEEK)) {
+            // Получаем число из настроек
+            juft_toq = mSettings.getInt(APP_PREFERENCES_WEEK, 0);
 
-        if (c.moveToFirst()) {
-            // определяем номера столбцов по имени в выборке
-//            int idColIndex = c.getColumnIndex("id");
-            final int typeColIndex = c.getColumnIndex("type_expense");
-            int sumColIndex = c.getColumnIndex("sum_of_expense");
-            Log.d(LOG_TAG, "typeColIndex: " + typeColIndex);
-            Log.d(LOG_TAG, "sumColIndex: " + sumColIndex);
-            do {
-                cnt++;
-                // получаем значения по номерам столбцов и пишем все в лог
-//                String msg = "ID = " + c.getInt(idColIndex) +
-//                        ", typeColIndex = " + c.getString(typeColIndex) +
-//                        ", sumColIndex = " + c.getInt(sumColIndex);
-//                Log.d(LOG_TAG, msg);
-                final String expense_type = c.getString(typeColIndex);
-                int sum_of_expenses = c.getInt(sumColIndex);
-                total_sum += sum_of_expenses;
-                    int[] colors = new int[2];
-                    colors[0] = Color.parseColor("#559966CC");
-                    colors[1] = Color.parseColor("#55336699");
-                    View item = ltInflater.inflate(R.layout.item, linLayout, false);
-                    TextView tvNumber = (TextView) item.findViewById(R.id.tvNumber);
-                    tvNumber.setText("" + cnt);
-                    TextView tvSurname = (TextView) item.findViewById(R.id.tvType);
-                    tvSurname.setText("Type: " + expense_type);
-                    TextView tvPhone = (TextView) item.findViewById(R.id.tvSum);
-                    tvPhone.setText("Sum: " + sum_of_expenses);
-                    item.setBackgroundColor(colors[cnt % 2]);
-                    linLayout.addView(item);
+        }
+    }
 
-                    item.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View view) {
-                            Intent intent2 = new Intent(MainActivity.this, AddExpense.class);
-                            intent2.putExtra("expense_type", expense_type);
-                            startActivity(intent2);
-                        }
-                    });
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SharedPreferences.Editor editor = mSettings.edit();
+        editor.putInt(APP_PREFERENCES_WEEK, juft_toq);
+        editor.apply();
+    }
 
-            } while (c.moveToNext());
-        } else
-            Log.d(LOG_TAG, "0 rows");
-        c.close();
+    @Override
+    public void onBackPressed() {
+        finish();
+
+    }
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
     }
 
     @Override
@@ -116,16 +201,44 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     @Override
-    protected void onResume() {
-        total_sum = 0;
-        cnt= 0;
-        getExpenseElements();
-        super.onResume();
-        tvTotal.setText("Total sum of expenses: " + total_sum);
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
+    @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public void onClick(View view) {
+    public boolean onNavigationItemSelected(MenuItem item) {
+        // Handle navigation view item clicks here.
+        int id = item.getItemId();
 
+        if (id == R.id.nav_lesson) {
+            // Handle the camera action
+        } else if (id == R.id.nav_homework) {
+
+        } else if (id == R.id.nav_settings) {
+            Intent intent = new Intent(MainActivity.this, Settings.class);
+            startActivity(intent);
+
+        } else if (id == R.id.nav_share) {
+
+        } else if (id == R.id.nav_send) {
+
+        }
+
+        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        drawer.closeDrawer(GravityCompat.START);
+        return true;
     }
+
+
 }

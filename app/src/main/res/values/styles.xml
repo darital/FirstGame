@@ -7,13 +7,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="MyCustomButton" parent="android:Widget.CompoundButton.Star">
+        <item name="android:buttonStyle">@style/MyCustomButton</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+    <style name="AlertDialog">
 
+    </style>
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+    <style name="MyTheme" parent="@android:style/Theme.DeviceDefault.Light.DarkActionBar" />
 
 </resources>

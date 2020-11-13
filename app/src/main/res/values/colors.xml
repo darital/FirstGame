@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#6200EE</color>
-    <color name="colorPrimaryDark">#3700B3</color>
-    <color name="colorAccent">#03DAC5</color>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#e6e6e6</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorGreen">#1fe0b1</color>
+    <color name="colorRed">#cd5c5c</color>
+    <color name="blue" type="color">#FF33B5E5</color>
+    <color name="purple" type="color">#FFAA66CC</color>
+    <color name="green" type="color">#FF99CC00</color>
+    <color name="orange" type="color">#FFFFBB33</color>
+    <color name="red" type="color">#FFFF4444</color>
+    <color name="darkblue" type="color">#FF0099CC</color>
+    <color name="darkpurple" type="color">#FF9933CC</color>
+    <color name="darkgreen" type="color">#FF669900</color>
+    <color name="darkorange" type="color">#FFFF8800</color>
+    <color name="darkred" type="color">#FFCC0000</color>
+    <color name="background_material_light">#d7d7d7</color>
+    <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="windowBackground">#a4a4a4</color>
+    <color name="holo_light_primary">#696969</color>
 </resources>
